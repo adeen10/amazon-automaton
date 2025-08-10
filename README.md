@@ -20,8 +20,8 @@ project-root/
 
 ### 1️⃣ Clone the repository
 ```bash
-git clone https://github.com/<your-username>/<your-repo>.git
-cd <your-repo>
+git clone https://github.com/adeen10/amazon-automaton.git
+cd amazon-automaton
 ```
 
 ### 2️⃣ Install dependencies
@@ -184,4 +184,4 @@ This project is licensed under the MIT License.
 ---
 
 ## 📧 Contact
-For questions or collaboration, reach out at **your.email@example.com**.
+For questions or collaboration, reach out at **adeen2002@gmail.com**.
