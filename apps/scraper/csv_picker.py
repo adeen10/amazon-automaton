@@ -1,0 +1,129 @@
+# csv_picker.py
+from __future__ import annotations
+import csv
+from datetime import datetime, timedelta
+from typing import Optional, Dict
+
+# --- config: match your exact CSV column names ---
+COL_PRODUCT_DETAILS = "Product Details"
+COL_URL             = "URL"
+COL_PARENT_REVENUE  = "Parent Level Revenue"
+COL_CREATION_DATE   = "Creation Date"
+
+# Try a few common date formats you may see in exports
+_DATE_FORMATS = (
+    "%Y-%m-%d",        # 2025-08-01
+    "%m/%d/%Y",        # 08/01/2025
+    "%d/%m/%Y",        # 01/08/2025
+    "%d-%b-%Y",        # 01-Aug-2025
+    "%b %d, %Y",       # Aug 01, 2025
+)
+
+def _to_number(s: str) -> Optional[float]:
+    """Convert currency/number like '$12,345.67' -> 12345.67; returns None if blank/invalid."""
+    if s is None:
+        return None
+    s = str(s).strip()
+    if not s:
+        return None
+    # Handle negatives like ($123.45)
+    neg = False
+    if s.startswith("(") and s.endswith(")"):
+        neg = True
+        s = s[1:-1]
+    # Remove $ and commas and spaces
+    s = s.replace("$", "").replace(",", "").strip()
+    if not s:
+        return None
+    try:
+        val = float(s)
+        return -val if neg else val
+    except ValueError:
+        return None
+
+def _parse_date(s: str) -> Optional[datetime]:
+    """Parse date using several common formats; returns None if it can't parse."""
+    if s is None:
+        return None
+    s = s.strip()
+    if not s:
+        return None
+    for fmt in _DATE_FORMATS:
+        try:
+            return datetime.strptime(s, fmt)
+        except ValueError:
+            continue
+    # Last resort: try to interpret YYYY/MM/DD (occasionally seen)
+    try:
+        parts = s.replace(".", "/").replace("-", "/").split("/")
+        if len(parts) == 3:
+            y, m, d = [int(p) for p in parts]
+            if y < 100:  # unlikely but safeguard
+                y += 2000
+            return datetime(y, m, d)
+    except Exception:
+        pass
+    return None
+
+def find_top_recent_product(csv_path: str, within_years: int = 2) -> Optional[Dict[str, str]]:
+    """
+    Scan the CSV and return a dict with the best recent product:
+    - Max 'Parent Level Revenue'
+    - 'Creation Date' within last `within_years` years (approx. 365*years days)
+
+    Returns None if no qualifying rows found.
+    """
+    cutoff = datetime.now() - timedelta(days=365 * within_years)
+    best_row = None
+    best_rev = float("-inf")
+
+    # utf-8-sig handles BOM if present
+    with open(csv_path, "r", encoding="utf-8-sig", newline="") as f:
+        reader = csv.DictReader(f)
+        # Normalize headers by stripping whitespace
+        reader.fieldnames = [h.strip() for h in reader.fieldnames] if reader.fieldnames else None
+
+        for row in reader:
+            # Access columns defensively
+            created_at = _parse_date(row.get(COL_CREATION_DATE))
+            if not created_at or created_at < cutoff:
+                continue
+
+            rev = _to_number(row.get(COL_PARENT_REVENUE))
+            if rev is None:
+                continue
+
+            if rev > best_rev:
+                best_rev = rev
+                best_row = row
+            elif rev == best_rev and best_row:
+                # Tie-breaker 1: most recent Creation Date wins
+                prev_dt = _parse_date(best_row.get(COL_CREATION_DATE))
+                if prev_dt and created_at > prev_dt:
+                    best_row = row
+                # (Optional) add more tie-breakers if you like (e.g., higher Review Count)
+
+    if not best_row:
+        return None
+
+    # Build a concise result payload (add fields as you need)
+    result = {
+        "product_details": (best_row.get(COL_PRODUCT_DETAILS) or "").strip(),
+        "url": (best_row.get(COL_URL) or "").strip(),
+        "parent_level_revenue": str(best_row.get(COL_PARENT_REVENUE) or "").strip(),
+        "creation_date": str(best_row.get(COL_CREATION_DATE) or "").strip(),
+        # Handy extras you might want downstream
+        "asin": (best_row.get("ASIN") or "").strip(),
+        "brand": (best_row.get("Brand") or "").strip(),
+        "price": (best_row.get("Price  $") or "").strip(),
+    }
+    return result
+
+# Optional: quick CLI test
+if __name__ == "__main__":
+    import sys, json
+    if len(sys.argv) < 2:
+        print("Usage: python csv_picker.py <path_to_csv>")
+        sys.exit(1)
+    res = find_top_recent_product(sys.argv[1])
+    print(json.dumps(res, indent=2) if res else "No qualifying product found.")
