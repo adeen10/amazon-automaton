@@ -5,6 +5,11 @@ apps/backend/node_modules/
 # Environment files
 apps/frontend/.env
 apps/backend/.env
+apps/scraper/.env
+
+# Python cache
+__pycache__/
+
 
 # OS / editor files
 .DS_Store

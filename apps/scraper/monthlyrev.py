@@ -119,7 +119,7 @@ def _extract_value_near_label(page: Page, label_text: str, timeout_ms: int = 120
 
     # 3) Use JS to climb up a few ancestors and find the first currency-looking text nearby
     val = page.evaluate(
-        """
+        r"""
         (labelEl) => {
           const money = (t) => /^\$?\\s*\\d[\\d,]*(?:\\.\\d+)?$/.test((t||"").trim());
 
@@ -161,7 +161,7 @@ def get_first_product_monthly_revenue(
     *,
     product_search_url: str,
     ext_id: str = "",                 # kept for backward-compat, ignored now
-    wait_secs: int = 20,
+    wait_secs: int = 30,
     popup_visible: bool = False,      # ignored
     close_all_tabs_first: bool = False,
     close_others_after_open: bool = True,

@@ -482,103 +482,103 @@ def run_competitors_flow(
     page.bring_to_front()
     page.wait_for_timeout(400)
 
-    # 2) open Filters
-    filters_btn = page.get_by_role("button", name=re.compile(r"^\s*Filters\s*$", re.I))
-    try:
-        filters_btn.wait_for(timeout=5000)
-        if _click_like_a_human_then_programmatic(page, filters_btn):
-            print("[INFO] Filters clicked.")
-        else:
-            raise Exception("Primary click failed")
-    except Exception:
-        alt = page.locator("button:has-text('Filters')").first
-        alt.wait_for(timeout=3000)
-        page.evaluate("(el)=>el.click()", alt.element_handle())
-        print("[INFO] Filters clicked (alt).")
+    # # 2) open Filters
+    # filters_btn = page.get_by_role("button", name=re.compile(r"^\s*Filters\s*$", re.I))
+    # try:
+    #     filters_btn.wait_for(timeout=5000)
+    #     if _click_like_a_human_then_programmatic(page, filters_btn):
+    #         print("[INFO] Filters clicked.")
+    #     else:
+    #         raise Exception("Primary click failed")
+    # except Exception:
+    #     alt = page.locator("button:has-text('Filters')").first
+    #     alt.wait_for(timeout=3000)
+    #     page.evaluate("(el)=>el.click()", alt.element_handle())
+    #     print("[INFO] Filters clicked (alt).")
 
-    # 3) wait for filter panel to appear
-    max_inputs = page.locator("input[placeholder='Max'][type='number']")
-    max_inputs.first.wait_for(timeout=10000)
+    # # 3) wait for filter panel to appear
+    # max_inputs = page.locator("input[placeholder='Max'][type='number']")
+    # max_inputs.first.wait_for(timeout=10000)
 
-    # pick the Nth visible 'Max' input and set value
-    target_max = _nth_visible(max_inputs, max_input_visible_index)
-    target_max.scroll_into_view_if_needed()
-    try:
-        target_max.fill("")
-        target_max.type(max_value, delay=25)
-    except Exception:
-        el = target_max.element_handle()
-        if el:
-            page.evaluate(
-                "(el, val)=>{ el.value=val; el.dispatchEvent(new Event('input',{bubbles:true})); }",
-                el, max_value
-            )
-    print(f"[INFO] Set {max_input_visible_index+1}th 'Max' input = {max_value}")
+    # # pick the Nth visible 'Max' input and set value
+    # target_max = _nth_visible(max_inputs, max_input_visible_index)
+    # target_max.scroll_into_view_if_needed()
+    # try:
+    #     target_max.fill("")
+    #     target_max.type(max_value, delay=25)
+    # except Exception:
+    #     el = target_max.element_handle()
+    #     if el:
+    #         page.evaluate(
+    #             "(el, val)=>{ el.value=val; el.dispatchEvent(new Event('input',{bubbles:true})); }",
+    #             el, max_value
+    #         )
+    # print(f"[INFO] Set {max_input_visible_index+1}th 'Max' input = {max_value}")
 
-    # 3b) Title Keyword Search section -> set keyword
-    title_section = page.locator("div.sc-lkIYrd:has-text('Title Keyword Search')").first
-    title_section.wait_for(timeout=8000)
+    # # 3b) Title Keyword Search section -> set keyword
+    # title_section = page.locator("div.sc-lkIYrd:has-text('Title Keyword Search')").first
+    # title_section.wait_for(timeout=8000)
 
-    try:
-        expanded = title_section.locator("[aria-expanded]").first
-        state = expanded.get_attribute("aria-expanded")
-        if state == "false":
-            try:
-                title_section.get_by_text("Title Keyword Search", exact=False).first.click(timeout=1500)
-            except Exception:
-                el = title_section.get_by_text("Title Keyword Search", exact=False).first.element_handle()
-                if el:
-                    page.evaluate("(el)=>el.click()", el)
-            page.wait_for_timeout(400)
-    except Exception:
-        pass
+    # try:
+    #     expanded = title_section.locator("[aria-expanded]").first
+    #     state = expanded.get_attribute("aria-expanded")
+    #     if state == "false":
+    #         try:
+    #             title_section.get_by_text("Title Keyword Search", exact=False).first.click(timeout=1500)
+    #         except Exception:
+    #             el = title_section.get_by_text("Title Keyword Search", exact=False).first.element_handle()
+    #             if el:
+    #                 page.evaluate("(el)=>el.click()", el)
+    #         page.wait_for_timeout(400)
+    # except Exception:
+    #     pass
 
-    title_input = title_section.locator("input[placeholder='Select one or more']").first
-    title_input.scroll_into_view_if_needed()
+    # title_input = title_section.locator("input[placeholder='Select one or more']").first
+    # title_input.scroll_into_view_if_needed()
 
-    typed = False
-    try:
-        title_input.click(timeout=1500)
-        title_input.fill("")
-        title_input.type(title_keyword, delay=20)
-        page.keyboard.press("Enter")
-        typed = True
-        print(f"[INFO] Title Keyword Search set via typing: {title_keyword}")
-    except Exception:
-        pass
+    # typed = False
+    # try:
+    #     title_input.click(timeout=1500)
+    #     title_input.fill("")
+    #     title_input.type(title_keyword, delay=20)
+    #     page.keyboard.press("Enter")
+    #     typed = True
+    #     print(f"[INFO] Title Keyword Search set via typing: {title_keyword}")
+    # except Exception:
+    #     pass
 
-    if not typed:
-        el = title_input.element_handle()
-        page.evaluate(
-            """(el, val) => {
-                el.value = val;
-                el.dispatchEvent(new Event('input', { bubbles: true }));
-            }""",
-            el, title_keyword
-        )
-        try:
-            title_input.focus()
-        except Exception:
-            pass
-        page.keyboard.press("Enter")
-        print(f"[INFO] Title Keyword Search set programmatically: {title_keyword}")
+    # if not typed:
+    #     el = title_input.element_handle()
+    #     page.evaluate(
+    #         """(el, val) => {
+    #             el.value = val;
+    #             el.dispatchEvent(new Event('input', { bubbles: true }));
+    #         }""",
+    #         el, title_keyword
+    #     )
+    #     try:
+    #         title_input.focus()
+    #     except Exception:
+    #         pass
+    #     page.keyboard.press("Enter")
+    #     print(f"[INFO] Title Keyword Search set programmatically: {title_keyword}")
 
-    # 4) Apply Filters
-    apply_btn = page.get_by_role("button", name=re.compile(r"^\s*Apply Filters\s*$", re.I))
-    try:
-        apply_btn.wait_for(timeout=5000)
-        if _click_like_a_human_then_programmatic(page, apply_btn):
-            print("[INFO] Apply Filters clicked.")
-        else:
-            raise Exception("Primary click failed")
-    except Exception:
-        alt_apply = page.locator("button:has-text('Apply Filters')").first
-        alt_apply.wait_for(timeout=3000)
-        page.evaluate("(el)=>el.click()", alt_apply.element_handle())
-        print("[INFO] Apply Filters clicked (alt).")
+    # # 4) Apply Filters
+    # apply_btn = page.get_by_role("button", name=re.compile(r"^\s*Apply Filters\s*$", re.I))
+    # try:
+    #     apply_btn.wait_for(timeout=5000)
+    #     if _click_like_a_human_then_programmatic(page, apply_btn):
+    #         print("[INFO] Apply Filters clicked.")
+    #     else:
+    #         raise Exception("Primary click failed")
+    # except Exception:
+    #     alt_apply = page.locator("button:has-text('Apply Filters')").first
+    #     alt_apply.wait_for(timeout=3000)
+    #     page.evaluate("(el)=>el.click()", alt_apply.element_handle())
+    #     print("[INFO] Apply Filters clicked (alt).")
 
-    print("[INFO] Waiting for results to refresh…")
-    page.wait_for_timeout(wait_after_apply_ms)
+    # print("[INFO] Waiting for results to refresh…")
+    # page.wait_for_timeout(wait_after_apply_ms)
 
     # 5) EXPORT -> CSV
     os.makedirs(download_dir, exist_ok=True)
@@ -610,14 +610,18 @@ def run_competitors_flow(
         ).first
         csv_tile.wait_for(state="visible", timeout=3000)
 
+    # print("found csv tile")
     downloaded_path = None
     downloaded = False
     try:
         with page.expect_download(timeout=15000) as dl_info:
-            try:
-                csv_tile.scroll_into_view_if_needed()
-            except Exception:
-                pass
+            # pass
+        #     try:
+        #         print("scrolling into view")
+        #         csv_tile.scroll_into_view_if_needed()
+        #     except Exception:
+        #         print("[WARN] Couldn't scroll into view for CSV tile.")
+        #         pass
             if not _click_like_a_human_then_programmatic(page, csv_tile):
                 raise Exception("CSV tile click failed")
         download = dl_info.value
@@ -625,6 +629,7 @@ def run_competitors_flow(
         stamp = datetime.now().strftime("%Y%m%d_%H%M%S")
         base, ext = os.path.splitext(suggested)
         save_as = os.path.join(download_dir, f"{base}_{stamp}{ext or '.csv'}")
+        # print(base,ext,save_as)
         download.save_as(save_as)
         print(f"[success] Downloaded CSV to: {save_as}")
         downloaded_path = save_as
@@ -667,7 +672,7 @@ def run_competitors_flow(
     # 6) Pick best product from CSV
     picker_best = None
     if downloaded_path:
-        picker_best = find_top_recent_product(downloaded_path, within_years=picker_within_years)
+        picker_best = find_top_recent_product(downloaded_path, title_keyword, within_years=picker_within_years)
         if not picker_best:
             print("[INFO] No qualifying product found in CSV.")
         else:

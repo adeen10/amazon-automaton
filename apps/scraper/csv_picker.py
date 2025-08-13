@@ -1,6 +1,7 @@
 # csv_picker.py
 from __future__ import annotations
 import csv
+import os
 from datetime import datetime, timedelta
 from typing import Optional, Dict
 
@@ -65,7 +66,48 @@ def _parse_date(s: str) -> Optional[datetime]:
         pass
     return None
 
-def find_top_recent_product(csv_path: str, within_years: int = 2) -> Optional[Dict[str, str]]:
+def filter_csv_by_reviews_and_keyword(input_csv, keyword_phrase, max_reviews=1000):
+    """
+    Filters input CSV rows where:
+      - Review Count <= max_reviews i.e. 1000
+      - Display Order column includes the keyword_phrase (case-insensitive)
+
+    Saves filtered rows to output_csv.
+    """
+    filtered_rows = []
+    # print(keyword_phrase.lower())
+
+    # Open and read input CSV
+    with open(input_csv, newline='', encoding='utf-8-sig') as infile:
+        reader = csv.DictReader(infile)
+        fieldnames = reader.fieldnames
+        for row in reader:
+            # Parse Review Count as integer, handle commas
+            try:
+                review_count = int(str(row.get('Review Count', '0')).replace(',', '').strip())
+            except ValueError:
+                review_count = 0
+
+            display_order = str(row.get('Product Details', '')).lower()
+            keyword_lower = keyword_phrase.lower()
+
+            # print(review_count,display_order)
+            if review_count <= max_reviews and keyword_lower in display_order:
+                # print(review_count, display_order)
+                filtered_rows.append(row)
+
+    # print(input_csv)
+    output_csv = os.path.join(os.getcwd(), "exports", f"filtered_{os.path.basename(input_csv)}")
+    # Write filtered rows to output CSV
+    with open(output_csv, 'w', newline='', encoding='utf-8') as outfile:
+        writer = csv.DictWriter(outfile, fieldnames=fieldnames)
+        writer.writeheader()
+        writer.writerows(filtered_rows)
+
+    print(f"[SUCCESS] Filtered CSV saved to {output_csv} ({len(filtered_rows)} rows).")
+    return output_csv
+
+def find_top_recent_product(csv_path: str, keyword_phrase: str, within_years: int = 2) -> Optional[Dict[str, str]]:
     """
     Scan the CSV and return a dict with the best recent product:
     - Max 'Parent Level Revenue'
@@ -73,6 +115,7 @@ def find_top_recent_product(csv_path: str, within_years: int = 2) -> Optional[Di
 
     Returns None if no qualifying rows found.
     """
+    csv_path = filter_csv_by_reviews_and_keyword(csv_path, keyword_phrase)
     cutoff = datetime.now() - timedelta(days=365 * within_years)
     best_row = None
     best_rev = float("-inf")
