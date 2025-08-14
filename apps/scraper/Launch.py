@@ -1,12 +1,3 @@
-# # command to run chrome profile
-# # PS Adeen:C:\WINDOWS\system32> & "C:\Users\Al-Wajid Laptops\AppData\Local\Google\Chrome\Application\chrome.exe" `       
-# # >>   --remote-debugging-port=9666 `                                                                                    
-# # >>   --user-data-dir="C:\Users\Al-Wajid Laptops\automation-profile" `                                                  
-# # >>   --profile-directory="Profile 4" `                                                                                 
-# # >>   "https://google.com"  
-
-# & "C:\Program Files\Google\Chrome\Application\chrome.exe" --remote-debugging-port=9222 --user-data-dir="C:\Users\USERNAME\automation-profile" --profile-directory="Profile 4"
-
 # Launch.py
 import os,re, time
 from helium_boot import boot_and_xray
@@ -39,6 +30,35 @@ os.makedirs(COMPETITORS_DOWNLOAD_DIR, exist_ok=True)
 
 print(CEREBRO_DOWNLOAD_DIR)
 print(COMPETITORS_DOWNLOAD_DIR)
+
+scraper_results = {
+    "category_revenue": {
+        "text": None,        # e.g. "Category Revenue: $2.3M"
+        "number": None       # e.g. 2300000.0
+    },
+    "monthly_revenue": {
+        "meta": None         # whatever `run_monthlyrev` returns (dict with product info, revenue, etc.)
+    },
+    "competitors_flow": {
+        "picker_best": None, # dict containing best competitor product info (url, product_details, parent_level_revenue)
+        "raw_result": None   # full dict returned by run_competitors_flow
+    },
+    "profitability_metrics": {
+        "fba_fees": {"text": None, "number": None},
+        "storage_fee_jan_sep": {"text": None, "number": None},
+        "storage_fee_oct_dec": {"text": None, "number": None},
+        "product_price": {"text": None, "number": None}
+    },
+    "keywords_volumes": {
+        "user_prompt": None,     # str prompt generated from CSV
+        "search_volumes": None   # list/dict of keyword-volume data from CSV
+    },
+    "gpt_projection": {
+        "response": None         # GPT analysis/summary/projection text or structured data
+    }
+}
+
+
 
 def open_with_xray(
     browser: Browser,
@@ -92,7 +112,7 @@ def open_with_xray(
     print("[warn] Did not positively detect XRAY within wait; proceeding anyway.")
     return None
 
-MAX_RETRIES = 3
+MAX_RETRIES = 5
 
 pw, browser, ctx, target_page = boot_and_xray(
     chrome_path=CHROME_PATH,
@@ -112,6 +132,8 @@ print("[Info] Getting Category Revenue")
 for attempt in range(1, MAX_RETRIES + 1):
     try:
         rev = get_category_revenue(browser, wait_after_click_ms=15000)
+        scraper_results["category_revenue"]["text"] = rev.get("text")
+        scraper_results["category_revenue"]["number"] = rev.get("number")
         # rev['text'] and rev['number'] are available if you want to persist them
         break  # Success, exit loop
     except Exception as e:
@@ -143,33 +165,6 @@ for attempt in range(1, MAX_RETRIES + 1):
     
 print("[Info] Getting Competitor Info .")
 
-# 2) Competitors flow
-for attempt in range(1, MAX_RETRIES + 1):
-    try:
-        result = run_competitors_flow(
-            browser,
-            download_dir=COMPETITORS_DOWNLOAD_DIR,
-            max_input_visible_index=7,   # 8th visible "Max" input
-            max_value="1000",
-            title_keyword= KEYWORD,
-            wait_after_apply_ms=8000,
-            picker_within_years=2,
-            try_read_updated_revenue=True,
-        )
-        break
-    except Exception as e:
-        print(f"[ERROR] Attempt {attempt} failed: {e}")
-        if attempt == MAX_RETRIES:
-            print("[ERROR] Max retries reached. Exiting...")
-        else:
-            print(f"[INFO] Retrying ({attempt}/{MAX_RETRIES})...")
-    
-# cleanup - delete all csv files in exports folder
-for file in os.listdir(COMPETITORS_DOWNLOAD_DIR):
-    if file.endswith(".csv"):
-        os.remove(os.path.join(COMPETITORS_DOWNLOAD_DIR, file))
-
-
 # getting monthly product revenue
 open_with_xray(
     browser,
@@ -179,8 +174,11 @@ open_with_xray(
     popup_visible=False
 )
 
+# -----put this is a retry loop as well ---------------
 print("[Info] Getting Monthly Revenue CSV .")
 meta = run_monthlyrev(browser, download_dir=MONTHLY_REV_DOWNLOAD_DIR)
+scraper_results["monthly_revenue"]["meta"] = meta
+
 print("[ok] monthlyrev complete:", meta)
 
 # cleanup
@@ -188,16 +186,58 @@ for file in os.listdir(MONTHLY_REV_DOWNLOAD_DIR):
     if file.endswith(".csv"):
         os.remove(os.path.join(MONTHLY_REV_DOWNLOAD_DIR, file))
 
+
+
+# 2) Competitors flow
+for attempt in range(1, MAX_RETRIES + 1):
+    try:
+        result = run_competitors_flow(
+            browser,
+            download_dir=COMPETITORS_DOWNLOAD_DIR,
+            max_input_visible_index=7,
+            max_value="1000",
+            title_keyword=KEYWORD,
+            wait_after_apply_ms=8000,
+            picker_within_years=2,
+            try_read_updated_revenue=True,
+        )
+        pb = result.get("picker_best") or {}
+        if pb.get("url") and pb.get("product_details") and pb.get("parent_level_revenue"):
+            COMPETITOR_PRODUCT_URL = pb["url"]
+            scraper_results["competitors_flow"]["raw_result"] = result
+            scraper_results["competitors_flow"]["picker_best"] = result.get("picker_best")
+
+            break
+        else:
+            raise ValueError("No qualifying product found in CSV.")
+    except Exception as e:
+        print(f"[ERROR] Attempt {attempt} failed: {e}")
+        if attempt == MAX_RETRIES:
+            print("[ERROR] Max retries reached. Exiting...")
+        else:
+            print(f"[INFO] Retrying ({attempt}/{MAX_RETRIES})...")
+
+    
+# cleanup - delete all csv files in exports folder
+for file in os.listdir(COMPETITORS_DOWNLOAD_DIR):
+    if file.endswith(".csv"):
+        os.remove(os.path.join(COMPETITORS_DOWNLOAD_DIR, file))
+
+
 print("[Info] Getting Profitability Calculator metrics.")
 for attempt in range(1, MAX_RETRIES + 1):
     try:
         metrics = get_profitability_metrics(
             browser,
-            product_url=AMAZON_PRODUCT_URL,   # <- uses your existing constant
+            product_url=COMPETITOR_PRODUCT_URL,   # <- uses your existing constant
             wait_secs=25,
             close_all_tabs_first=False,       # set True if you want a full reset before starting
             close_others_after_open=True,     # keeps exactly one tab open
         )
+        for key in scraper_results["profitability_metrics"]:
+            scraper_results["profitability_metrics"][key]["text"] = metrics[key]["text"]
+            scraper_results["profitability_metrics"][key]["number"] = metrics[key]["number"]
+        
         print("FBA Fees:", metrics["fba_fees"]["text"], "| number:", metrics["fba_fees"]["number"])
         print("Storage Fee Jan–Sep:", metrics["storage_fee_jan_sep"]["text"], "| number:", metrics["storage_fee_jan_sep"]["number"])
         print("Storage Fee Oct–Dec:", metrics["storage_fee_oct_dec"]["text"], "| number:", metrics["storage_fee_oct_dec"]["number"])
@@ -238,7 +278,12 @@ else:
             print("[DONE] Cerebro CSV saved to:", csv_path)
 
             user_prompt, search_volumes = get_keywords_volumes_from_csv(csv_path)
+            
+            scraper_results["keywords_volumes"]["user_prompt"] = user_prompt
+            scraper_results["keywords_volumes"]["search_volumes"] = search_volumes
+            
             projections = get_gpt_response(user_prompt, search_volumes)
+            scraper_results["gpt_projection"]["response"] = projections
             print(projections)
             #cleanup - delete all csv files in exports/cerebro folder
             for file in os.listdir(CEREBRO_DOWNLOAD_DIR):
@@ -251,8 +296,8 @@ else:
                 print("[ERROR] Max retries reached. Exiting...")
             else:
                 print(f"[INFO] Retrying ({attempt}/{MAX_RETRIES})...")
-
-
+                
+print(scraper_results)
 input("Press Enter to disconnect…")
 browser.close()
 pw.stop()

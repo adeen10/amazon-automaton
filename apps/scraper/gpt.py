@@ -2,9 +2,10 @@ import os
 import csv
 import json
 from openai import OpenAI
-from dotenv import load_dotenv
+from dotenv import load_dotenv, find_dotenv
 
-load_dotenv()
+load_dotenv(find_dotenv(), override=True)
+
 
 # Initialize client with your API key
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
