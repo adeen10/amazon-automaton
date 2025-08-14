@@ -406,7 +406,7 @@ def boot_and_xray(
                 { type: "open-page-and-xray", params: { url: targetUrl } },
                 () => resolve(true)
             );
-            setTimeout(() => resolve(false), 30000); // force resolve after 30s
+            setTimeout(() => resolve(false), 50000); // force resolve after 50s
         })""",
         target_url,
     )

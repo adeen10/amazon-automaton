@@ -1,6 +1,7 @@
 import os
 import csv
 import json
+import math
 from openai import OpenAI
 from dotenv import load_dotenv, find_dotenv
 
@@ -106,31 +107,31 @@ def get_gpt_response(user_content, search_volumes):
             high_sales = [traffic_rank * 1.25 * content_dict["CVR"] for traffic_rank in high_traffic]
             high_revenue = [sale * profit_per_unit_start_ads for sale in high_sales]
             
-            base_total_sales = sum(sales)
-            base_total_revenue = sum(revenue)
-            base_total_profit_start_ads = sum(total_profit_start_ads)
-            base_total_profit_end_ads = sum(total_profit_end_ads)
+            base_total_sales = math.floor(sum(sales))
+            base_total_revenue = round(sum(revenue), 2)
+            base_total_profit_start_ads = round(sum(total_profit_start_ads), 2)
+            base_total_profit_end_ads = round(sum(total_profit_end_ads), 2)
 
-            low_total_sales = sum(low_sales)
-            low_total_revenue = sum([sale * content_dict["AOV"] for sale in low_sales])
-            low_total_profit = sum(low_revenue)
+            low_total_sales = math.floor(sum(low_sales))
+            low_total_revenue = round(sum([sale * content_dict["AOV"] for sale in low_sales]), 2)
+            low_total_profit = round(sum(low_revenue), 2)
 
-            high_total_sales = sum(high_sales)
-            high_total_revenue = sum([sale * content_dict["AOV"] for sale in high_sales])
-            high_total_profit = sum(high_revenue)
+            high_total_sales = math.floor(sum(high_sales))
+            high_total_revenue = round(sum([sale * content_dict["AOV"] for sale in high_sales]), 2)
+            high_total_profit = round(sum(high_revenue), 2)
 
-            print(f"Base Total Sales: {base_total_sales} units")
-            print(f"Base Total Revenue: {base_total_revenue}")
-            print(f"Base Total Profit Start Ads: {base_total_profit_start_ads}")
-            print(f"Base Total Profit End Ads: {base_total_profit_end_ads}")
-            print("-----------------------------------------")
-            print(f"Low Total Sales: {low_total_sales} units")
-            print(f"Low Total Revenue: {low_total_revenue}")
-            print(f"Low Total Profit: {low_total_profit}")
-            print("-----------------------------------------")
-            print(f"High Total Sales: {high_total_sales} units")
-            print(f"High Total Revenue: {high_total_revenue}")
-            print(f"High Total Profit: {high_total_profit}")
+            # print(f"Base Total Sales: {base_total_sales} units")
+            # print(f"Base Total Revenue: {base_total_revenue}")
+            # print(f"Base Total Profit Start Ads: {base_total_profit_start_ads}")
+            # print(f"Base Total Profit End Ads: {base_total_profit_end_ads}")
+            # print("-----------------------------------------")
+            # print(f"Low Total Sales: {low_total_sales} units")
+            # print(f"Low Total Revenue: {low_total_revenue}")
+            # print(f"Low Total Profit: {low_total_profit}")
+            # print("-----------------------------------------")
+            # print(f"High Total Sales: {high_total_sales} units")
+            # print(f"High Total Revenue: {high_total_revenue}")
+            # print(f"High Total Profit: {high_total_profit}")
 
             return {
                 "base_total_sales": base_total_sales,

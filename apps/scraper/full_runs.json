@@ -1,0 +1,222 @@
+{
+  "runs": [
+    {
+      "brand": "Big wipes",
+      "countries": [
+        {
+          "name": "UK",
+          "products": [
+            {
+              "productname": "WILSON NFL Super Grip Composite Footballs",
+              "url": "https://www.amazon.com/Wilson-Super-Grip-Official-Football/dp/B0012SNLJG/ref=sr_1_1?crid=11N4YAPWDPUF1&dib=eyJ2IjoiMSJ9.VFtpRBXpX0rlGNlPl2X6F_ab989t9a323UfwzuNlhpbtkOqD-aubFTI4dAX36PwIXH7cLX7awRpXDQb6-IG3V_VmUb3FmmkC9xgCLVouC3tetG6k0jSvuBtaNGEBvomgUd8jINBfqaATt9DrujyS01gNneur4LpTIpMnZEp4lQwhUdDyH3h6e93SrJZwLtfHfWetsXNSmcodkCPIWGQ7Ma1gOVeqLrBvxsPtvzsMOjisBhY8i0gazoPWVw9_rph6tc4Ycuva4Q0KZtPeMayX1Gl1-AY900Z7aQ1wVcfKEqs.yezBLzNWMR_sl6Maz5gxBkqrSWK93IBjwUEN_UBBmIE&dib_tag=se&keywords=football&qid=1755186151&sprefix=football%2Caps%2C1829&sr=8-1&th=1",
+              "keyword": "football",
+              "categoryUrl": "https://www.amazon.com/s?k=football&crid=11N4YAPWDPUF1&sprefix=football%2Caps%2C1829&ref=nb_sb_noss_1",
+              "result": {
+                "inputs": {
+                  "category_url": "https://www.amazon.com/s?k=football&crid=11N4YAPWDPUF1&sprefix=football%2Caps%2C1829&ref=nb_sb_noss_1",
+                  "product_url": "https://www.amazon.com/Wilson-Super-Grip-Official-Football/dp/B0012SNLJG/ref=sr_1_1?crid=11N4YAPWDPUF1&dib=eyJ2IjoiMSJ9.VFtpRBXpX0rlGNlPl2X6F_ab989t9a323UfwzuNlhpbtkOqD-aubFTI4dAX36PwIXH7cLX7awRpXDQb6-IG3V_VmUb3FmmkC9xgCLVouC3tetG6k0jSvuBtaNGEBvomgUd8jINBfqaATt9DrujyS01gNneur4LpTIpMnZEp4lQwhUdDyH3h6e93SrJZwLtfHfWetsXNSmcodkCPIWGQ7Ma1gOVeqLrBvxsPtvzsMOjisBhY8i0gazoPWVw9_rph6tc4Ycuva4Q0KZtPeMayX1Gl1-AY900Z7aQ1wVcfKEqs.yezBLzNWMR_sl6Maz5gxBkqrSWK93IBjwUEN_UBBmIE&dib_tag=se&keywords=football&qid=1755186151&sprefix=football%2Caps%2C1829&sr=8-1&th=1",
+                  "keyword": "football"
+                },
+                "category_revenue": {
+                  "text": "$4,140,915",
+                  "number": "4140915"
+                },
+                "monthly_revenue": {
+                  "meta": {
+                    "asin": null,
+                    "file_name": "",
+                    "product_url": "",
+                    "parent_level_revenue": 231767.51,
+                    "parent_level_revenue_text": "$231,767.51",
+                    "source_url": "https://www.amazon.com/s?k=football&crid=11N4YAPWDPUF1&sprefix=football%2Caps%2C1829&ref=nb_sb_noss_1",
+                    "saved_csv": "",
+                    "scraped_at": "2025-08-14T16:04:23Z",
+                    "module": "monthlyrev"
+                  }
+                },
+                "competitors_flow": {
+                  "picker_best": {
+                    "product_details": "SwimWays Hydro Waterproof Football, Outdoor Games for Adults and Kids, Swimming Pool Accessories and Pool Party Games, 9.25 Inches, Green",
+                    "url": "https://www.amazon.com/dp/B0CCW7Q9F5?psc=1",
+                    "parent_level_revenue": "83,091.29",
+                    "creation_date": "Dec 12, 2023",
+                    "asin": "B0CCW7Q9F5",
+                    "brand": "SwimWays",
+                    "price": "12.99"
+                  },
+                  "raw_result": {
+                    "downloaded_path": "E:\\automation\\ares projects\\amazon automation\\amazon-automation\\apps\\scraper\\exports\\Helium_10_Xray_2025-08-14_20250814_210425.csv",
+                    "picker_best": {
+                      "product_details": "SwimWays Hydro Waterproof Football, Outdoor Games for Adults and Kids, Swimming Pool Accessories and Pool Party Games, 9.25 Inches, Green",
+                      "url": "https://www.amazon.com/dp/B0CCW7Q9F5?psc=1",
+                      "parent_level_revenue": "83,091.29",
+                      "creation_date": "Dec 12, 2023",
+                      "asin": "B0CCW7Q9F5",
+                      "brand": "SwimWays",
+                      "price": "12.99"
+                    },
+                    "updated_total_revenue_text": "$4,140,915",
+                    "updated_total_revenue_number": "4140915"
+                  }
+                },
+                "profitability_metrics": {
+                  "fba_fees": {
+                    "text": "$7.88",
+                    "number": "7.88"
+                  },
+                  "storage_fee_jan_sep": {
+                    "text": "$0.41",
+                    "number": "0.41"
+                  },
+                  "storage_fee_oct_dec": {
+                    "text": "$1.14",
+                    "number": "1.14"
+                  },
+                  "product_price": {
+                    "text": "12.99",
+                    "number": "12.99"
+                  }
+                },
+                "keywords_volumes": {
+                  "user_prompt": "football 57967\nfootball accessories 45692\nnerf football 15086\nfootball gear 9757\nyouth football 8180\nwater football 6135\nfootball training equipment 5172\nfootball backplates 4468\nflag football 4129\npool football 4129Aforementioned are the top keywords sorted by search volume.",
+                  "search_volumes": [
+                    57967,
+                    45692,
+                    15086,
+                    9757,
+                    8180,
+                    6135,
+                    5172,
+                    4468,
+                    4129,
+                    4129
+                  ]
+                },
+                "gpt_projection": {
+                  "response": {
+                    "base_total_sales": 241,
+                    "base_total_revenue": 12053.62,
+                    "base_total_profit_start_ads": 4218.77,
+                    "base_total_profit_end_ads": 5424.13,
+                    "low_total_sales": 158,
+                    "low_total_revenue": 7910.19,
+                    "low_total_profit": 2768.57,
+                    "high_total_sales": 339,
+                    "high_total_revenue": 16950.41,
+                    "high_total_profit": 5932.64
+                  }
+                },
+                "errors": [
+                  "category_revenue attempt 1 failed: XRAY not detected on any Amazon tab."
+                ]
+              }
+            },
+            {
+              "productname": "Nike Academy Football FZ2966",
+              "url": "https://www.amazon.com/NIKE-Unisex-Adult-Academy-Football-Blackened/dp/B0DBLQGGWV/ref=sr_1_1?dib=eyJ2IjoiMSJ9.fMvEXwDDobQKyHb8bN2vIa9swZN8acN-V2FC0niqgji0aIEDmHtOtP69KSO-Yq84Lq3fW3C6yKHw7cGcoB-dF8zueQ4sk8Q3tOCdPiGy23dSE_2naiedFFEjN1r27N6AxX0lZtHnyHBgduXqErcvEn40fWlInIF1AjkryeMYPzkc0ZNy0A75voRcr5hnu61ylYqCuqF4izcOTGpft9arlitT2tSXdcECi0CChwglFSjx34x8wA8CnDtDFqN4NV-6ux-cI3DkLSmwHxQy4h7L6jz2OYHo_9tsICI8noZBK2M.wGmZLOtX3hxtxNulQlpUwsfE5UOVUnreMUMpn6yrGb8&dib_tag=se&keywords=soccer+ball&qid=1755186233&sr=8-1",
+              "keyword": "soccer ball",
+              "categoryUrl": "https://www.amazon.com/s?k=soccer+ball&ref=nb_sb_noss",
+              "result": {
+                "inputs": {
+                  "category_url": "https://www.amazon.com/s?k=soccer+ball&ref=nb_sb_noss",
+                  "product_url": "https://www.amazon.com/NIKE-Unisex-Adult-Academy-Football-Blackened/dp/B0DBLQGGWV/ref=sr_1_1?dib=eyJ2IjoiMSJ9.fMvEXwDDobQKyHb8bN2vIa9swZN8acN-V2FC0niqgji0aIEDmHtOtP69KSO-Yq84Lq3fW3C6yKHw7cGcoB-dF8zueQ4sk8Q3tOCdPiGy23dSE_2naiedFFEjN1r27N6AxX0lZtHnyHBgduXqErcvEn40fWlInIF1AjkryeMYPzkc0ZNy0A75voRcr5hnu61ylYqCuqF4izcOTGpft9arlitT2tSXdcECi0CChwglFSjx34x8wA8CnDtDFqN4NV-6ux-cI3DkLSmwHxQy4h7L6jz2OYHo_9tsICI8noZBK2M.wGmZLOtX3hxtxNulQlpUwsfE5UOVUnreMUMpn6yrGb8&dib_tag=se&keywords=soccer+ball&qid=1755186233&sr=8-1",
+                  "keyword": "soccer ball"
+                },
+                "category_revenue": {
+                  "text": "$3,538,199",
+                  "number": "3538199"
+                },
+                "monthly_revenue": {
+                  "meta": {
+                    "asin": null,
+                    "file_name": "",
+                    "product_url": "",
+                    "parent_level_revenue": 36551.91,
+                    "parent_level_revenue_text": "$36,551.91",
+                    "source_url": "https://www.amazon.com/s?k=soccer+ball&ref=nb_sb_noss",
+                    "saved_csv": "",
+                    "scraped_at": "2025-08-14T16:06:47Z",
+                    "module": "monthlyrev"
+                  }
+                },
+                "competitors_flow": {
+                  "picker_best": {
+                    "product_details": "Soccer Ball Size 5&Size 3 for Youth and Adults, Indoor Training Practice Soccer Ball, Gift Idea for Kid with 1 Pump 1 Net Bag and 2 Needle",
+                    "url": "https://www.amazon.com/dp/B0CRBFNTHS?psc=1",
+                    "parent_level_revenue": "47,894.36",
+                    "creation_date": "Jan 2, 2024",
+                    "asin": "B0CRBFNTHS",
+                    "brand": "MGZFEZN",
+                    "price": "19.99"
+                  },
+                  "raw_result": {
+                    "downloaded_path": "E:\\automation\\ares projects\\amazon automation\\amazon-automation\\apps\\scraper\\exports\\Helium_10_Xray_2025-08-14_20250814_210650.csv",
+                    "picker_best": {
+                      "product_details": "Soccer Ball Size 5&Size 3 for Youth and Adults, Indoor Training Practice Soccer Ball, Gift Idea for Kid with 1 Pump 1 Net Bag and 2 Needle",
+                      "url": "https://www.amazon.com/dp/B0CRBFNTHS?psc=1",
+                      "parent_level_revenue": "47,894.36",
+                      "creation_date": "Jan 2, 2024",
+                      "asin": "B0CRBFNTHS",
+                      "brand": "MGZFEZN",
+                      "price": "19.99"
+                    },
+                    "updated_total_revenue_text": "$3,538,199",
+                    "updated_total_revenue_number": "3538199"
+                  }
+                },
+                "profitability_metrics": {
+                  "fba_fees": {
+                    "text": "$5.87",
+                    "number": "5.87"
+                  },
+                  "storage_fee_jan_sep": {
+                    "text": "$0.14",
+                    "number": "0.14"
+                  },
+                  "storage_fee_oct_dec": {
+                    "text": "$0.39",
+                    "number": "0.39"
+                  },
+                  "product_price": {
+                    "text": "19.99",
+                    "number": "19.99"
+                  }
+                },
+                "keywords_volumes": {
+                  "user_prompt": "soccer ball 67606\nsoccer ball size 5 22456\nsize 3 soccer ball 18100\nsize 4 soccer ball 17884\nsoccer ball size 4 15088\nsize 5 soccer ball 10036\nsoccer ball size 3 8424\nsoccer ball bag 4468\nkids soccer ball 3930\nnike soccer ball 3923Aforementioned are the top keywords sorted by search volume.",
+                  "search_volumes": [
+                    67606,
+                    22456,
+                    18100,
+                    17884,
+                    15088,
+                    10036,
+                    8424,
+                    4468,
+                    3930,
+                    3923
+                  ]
+                },
+                "gpt_projection": {
+                  "response": {
+                    "base_total_sales": 103,
+                    "base_total_revenue": 2578.72,
+                    "base_total_profit_start_ads": 825.19,
+                    "base_total_profit_end_ads": 1031.49,
+                    "low_total_sales": 67,
+                    "low_total_revenue": 1692.29,
+                    "low_total_profit": 541.53,
+                    "high_total_sales": 145,
+                    "high_total_revenue": 3626.33,
+                    "high_total_profit": 1160.43
+                  }
+                },
+                "errors": []
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
