@@ -6,12 +6,11 @@ This guide explains how to set up and use the Amazon Automaton system, which con
 
 The system has three main components:
 1. **Frontend** (React/Vite) - User interface for data entry
-2. **Backend** (Node.js/Express) - API server that receives data and triggers the scraper
+2. **Backend** (Python/FastAPI) - API server that receives data and triggers the scraper
 3. **Scraper** (Python) - Main automation script that processes the data
 
 ## Prerequisites
 
-- **Node.js** (v16 or higher) - [Download here](https://nodejs.org/)
 - **Python** (v3.8 or higher) - [Download here](https://python.org/)
 - **Google Chrome** - Required for the scraper automation
 
@@ -41,10 +40,12 @@ The system has three main components:
 
 ```bash
 cd apps/backend
-npm install
-npm start
-
+pip install -r requirements.txt
+python main.py
 ```
+
+**Windows users:** Double-click `START_BACKEND.bat`
+**Mac/Linux users:** Run `./start_backend.sh`
 
 ### Frontend Setup
 
@@ -56,10 +57,11 @@ npm run dev
 
 ### Python Dependencies
 
-The scraper requires several Python packages. Install them with:
+The backend and scraper require Python packages. Install them with:
 
 ```bash
-cd apps/scraper
+cd apps/backend
+pip install -r requirements.txt
 pip install playwright
 playwright install chromium
 # Add other required packages as needed
@@ -103,16 +105,16 @@ The system expects data in this format:
 
 ### Common Issues
 
-1. **"Node.js not found"**: Install Node.js from https://nodejs.org/
-2. **"Python not found"**: Install Python from https://python.org/
-3. **"Port already in use"**: Close other applications using ports 4000 or 5173
-4. **"Scraper failed"**: Check that Chrome is installed and Python dependencies are set up
+1. **"Python not found"**: Install Python from https://python.org/
+2. **"Port already in use"**: Close other applications using ports 4000 or 5173
+3. **"Scraper failed"**: Check that Chrome is installed and Python dependencies are set up
 
 ### Backend Issues
 
 - Check that the backend is running on `http://localhost:4000`
-- Verify that all dependencies are installed with `npm install`
+- Verify that all dependencies are installed with `pip install -r requirements.txt`
 - Check the console for error messages
+- API documentation available at `http://localhost:4000/docs`
 
 ### Frontend Issues
 
@@ -135,14 +137,24 @@ amazon-automaton/
 │   ├── frontend/          # React frontend
 │   │   ├── START_FRONTEND.bat
 │   │   └── src/
-│   └── backend/           # Node.js backend
+│   └── backend/           # Python FastAPI backend + scraper
+│       ├── main.py
+│       ├── requirements.txt
 │       ├── START_BACKEND.bat
-│       ├── controllers/
-│       ├── routes/
-│       └── scraper/       # Python scraper
-│           ├── main_loop.py
-│           ├── run_scraper.py
-│           └── exports/
+│       ├── start_backend.sh
+│       ├── main_loop.py   # Main scraper logic
+│       ├── sheet_writer.py
+│       ├── helium_boot.py
+│       ├── gpt.py
+│       ├── cerebro.py
+│       ├── competitors.py
+│       ├── monthlyrev.py
+│       ├── profitcal.py
+│       ├── getCategoryRev.py
+│       ├── Launch.py
+│       ├── csv_picker.py
+│       ├── full_runs.json
+│       └── exports/       # Output files
 └── SETUP_AND_USAGE.md
 ```
 
@@ -151,12 +163,12 @@ amazon-automaton/
 ### Adding New Features
 
 1. **Frontend**: Modify `apps/frontend/src/App.jsx`
-2. **Backend**: Add routes in `apps/backend/routes/` and controllers in `apps/backend/controllers/`
-3. **Scraper**: Modify `apps/scraper/main_loop.py`
+2. **Backend**: Add endpoints in `apps/backend/main.py`
+3. **Scraper**: Modify `apps/backend/main_loop.py`
 
 ### Testing
 
-1. Start the backend: `cd apps/backend && npm start`
+1. Start the backend: `cd apps/backend && python main.py`
 2. Start the frontend: `cd apps/frontend && npm run dev`
 3. Fill out the form and submit
 4. Check the scraper output in the console
