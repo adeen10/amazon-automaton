@@ -4,9 +4,72 @@ import { useMemo, useState } from "react";
 const COUNTRY_OPTIONS = ["US", "UK", "CAN", "DE", "AUS", "UAE"];
 const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
 
+// URL validation helper
+const isValidUrl = (url) => {
+  try {
+    const urlObj = new URL(url);
+    return urlObj.hostname.toLowerCase().includes('amazon.com');
+  } catch {
+    return false;
+  }
+};
+
+// Validation helper
+const validateStep1 = (brands) => {
+  const errors = [];
+  
+  brands.forEach((brand, brandIndex) => {
+    if (!brand.name.trim()) {
+      errors.push(`Brand ${brandIndex + 1}: Brand name is required`);
+    }
+    
+    brand.countries.forEach((country, countryIndex) => {
+      if (!country.name) {
+        errors.push(`Brand ${brandIndex + 1}, Country ${countryIndex + 1}: Country is required`);
+      }
+      if (!country.count || country.count < 1) {
+        errors.push(`Brand ${brandIndex + 1}, Country ${countryIndex + 1}: Product count must be at least 1`);
+      }
+    });
+  });
+  
+  return errors;
+};
+
+const validateStep2 = (detail) => {
+  const errors = [];
+  
+  detail.forEach((brand, brandIndex) => {
+    brand.countries.forEach((country, countryIndex) => {
+      country.products.forEach((product, productIndex) => {
+        if (!product.productname.trim()) {
+          errors.push(`Brand "${brand.brand}", Country "${country.name}", Product ${productIndex + 1}: Product name is required`);
+        }
+        if (!product.url.trim()) {
+          errors.push(`Brand "${brand.brand}", Country "${country.name}", Product ${productIndex + 1}: Product URL is required`);
+        } else if (!isValidUrl(product.url)) {
+          errors.push(`Brand "${brand.brand}", Country "${country.name}", Product ${productIndex + 1}: Product URL must be a valid Amazon URL`);
+        }
+        if (!product.keyword.trim()) {
+          errors.push(`Brand "${brand.brand}", Country "${country.name}", Product ${productIndex + 1}: Keyword is required`);
+        }
+        if (!product.categoryUrl.trim()) {
+          errors.push(`Brand "${brand.brand}", Country "${country.name}", Product ${productIndex + 1}: Category URL is required`);
+        } else if (!isValidUrl(product.categoryUrl)) {
+          errors.push(`Brand "${brand.brand}", Country "${country.name}", Product ${productIndex + 1}: Category URL must be a valid Amazon URL`);
+        }
+      });
+    });
+  });
+  
+  return errors;
+};
+
 /* ---------- app ---------- */
 export default function App() {
   const [step, setStep] = useState(1);
+  const [showErrors, setShowErrors] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Step 1 data model
   const [brands, setBrands] = useState([
@@ -90,6 +153,14 @@ export default function App() {
     });
 
   const goStep2 = () => {
+    // Validate step 1 data
+    const step1Errors = validateStep1(brands);
+    if (step1Errors.length > 0) {
+      const errorMessage = "❌ Please fix the following errors:\n\n" + step1Errors.join('\n');
+      alert(errorMessage);
+      return;
+    }
+
     const built = brands.map((b) => ({
       brand: b.name,
       countries: b.countries.map((c) => ({
@@ -98,7 +169,7 @@ export default function App() {
           productname: "",
           url: "",
           keyword: "",
-          categoryUrl: "", // NEW
+          categoryUrl: "",
         })),
       })),
     }));
@@ -160,19 +231,63 @@ export default function App() {
     setSectionIndex((i) => clamp(i + 1, 0, totalSections - 1));
 
   const handleSubmit = async () => {
-    // shape payload
-    const payload = { brands: detail };
+    // Validate step 2 data
+    const step2Errors = validateStep2(detail);
+    if (step2Errors.length > 0) {
+      const errorMessage = "❌ Please fix the following errors:\n\n" + step2Errors.join('\n');
+      alert(errorMessage);
+      return;
+    }
+
+    // Set loading state
+    setIsSubmitting(true);
+
+    // Shape payload to match backend expectations
+    const payload = { 
+      brands: detail.map(brand => ({
+        brand: brand.brand,
+        countries: brand.countries.map(country => ({
+          name: country.name,
+          products: country.products.map(product => ({
+            productname: product.productname,
+            url: product.url,
+            keyword: product.keyword,
+            categoryUrl: product.categoryUrl
+          }))
+        }))
+      }))
+    };
+
     try {
-      // TODO: replace with your backend URL
-      await fetch("http://localhost:4000/api/submissions", {
+      console.log("Submitting payload:", payload);
+      
+      const response = await fetch("http://localhost:4000/api/submissions", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
-      console.log("SUBMIT", payload);
-      alert("Submitted ✅");
+
+      const result = await response.json();
+      
+      if (response.ok) {
+        console.log("SUBMIT SUCCESS", result);
+        alert("✅ Submitted successfully! The scraper is now running in the background.");
+        
+        // Reset to step 1 after successful submission
+        setStep(1);
+        setBrands([{ name: "", countries: [{ name: "US", count: 1 }] }]);
+        setDetail([]);
+        setSectionIndex(0);
+      } else {
+        console.error("SUBMIT ERROR", result);
+        alert(`❌ Submission failed: ${result.error || 'Unknown error'}`);
+      }
     } catch (e) {
-      alert("Failed to submit");
+      console.error("SUBMIT EXCEPTION", e);
+      alert(`❌ Failed to submit: ${e.message}`);
+    } finally {
+      // Clear loading state
+      setIsSubmitting(false);
     }
   };
 
@@ -190,10 +305,27 @@ export default function App() {
       )}
 
       <div className="max-w-5xl mx-auto px-4 py-8">
-        <h1 className="text-3xl font-bold mb-6">Product Intake</h1>
+        <div className="flex items-center justify-between mb-6">
+          <h1 className="text-3xl font-bold">Product Intake</h1>
+          <div className="text-sm text-slate-400">
+            Step {step} of 2
+          </div>
+        </div>
 
         {step === 1 && (
           <div className="space-y-6">
+            <div className="bg-blue-900/20 border border-blue-700/50 rounded-lg p-4">
+              <div className="flex items-start gap-3">
+                <div className="text-blue-400 text-lg">💡</div>
+                <div>
+                  <h3 className="font-semibold text-blue-300 mb-2">Step 1: Setup Brands & Countries</h3>
+                  <p className="text-sm text-slate-300">
+                    Add your brands and specify which countries you want to analyze. For each country, 
+                    set the number of products you want to process (1-10).
+                  </p>
+                </div>
+              </div>
+            </div>
             {brands.map((b, bi) => (
               <div
                 key={bi}
@@ -203,11 +335,22 @@ export default function App() {
                   <div className="flex-1">
                     <label className="block text-sm mb-1">Brand</label>
                     <input
-                      className="w-full rounded-lg bg-slate-800 border border-slate-700 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className={`w-full rounded-lg bg-slate-800 border px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                        b.name && !b.name.trim() 
+                          ? 'border-red-500 focus:ring-red-500' 
+                          : b.name && b.name.trim()
+                          ? 'border-green-500 focus:ring-green-500'
+                          : 'border-slate-700'
+                      }`}
                       placeholder="e.g. Big Wipes"
                       value={b.name}
                       onChange={(e) => updateBrandName(bi, e.target.value)}
                     />
+                    {b.name && !b.name.trim() && (
+                      <div className="text-xs text-red-400 mt-1">
+                        ⚠️ Brand name cannot be empty
+                      </div>
+                    )}
                   </div>
                   {brands.length > 1 && (
                     <button
@@ -303,6 +446,18 @@ export default function App() {
 
         {step === 2 && currentCountry && (
           <div className="space-y-6">
+            <div className="bg-green-900/20 border border-green-700/50 rounded-lg p-4">
+              <div className="flex items-start gap-3">
+                <div className="text-green-400 text-lg">📝</div>
+                <div>
+                  <h3 className="font-semibold text-green-300 mb-2">Step 2: Product Details</h3>
+                  <p className="text-sm text-slate-300">
+                    Fill in the details for each product. Make sure all URLs are valid Amazon URLs 
+                    (must contain "amazon.com"). All fields are required.
+                  </p>
+                </div>
+              </div>
+            </div>
             <div className="flex items-center justify-between">
               <div>
                 <div className="text-sm opacity-70">Section</div>
@@ -327,11 +482,22 @@ export default function App() {
                       Product name
                     </label>
                     <input
-                      className="w-full rounded-lg bg-slate-900 border border-slate-700 px-3 py-2 focus:ring-2 focus:ring-blue-500"
+                      className={`w-full rounded-lg bg-slate-900 border px-3 py-2 focus:ring-2 focus:ring-blue-500 ${
+                        p.productname && !p.productname.trim() 
+                          ? 'border-red-500 focus:ring-red-500' 
+                          : p.productname && p.productname.trim()
+                          ? 'border-green-500 focus:ring-green-500'
+                          : 'border-slate-700'
+                      }`}
                       value={p.productname}
                       onChange={(e) => updateProduct(pi, "productname", e.target.value)}
                       placeholder="cricket bat"
                     />
+                    {p.productname && !p.productname.trim() && (
+                      <div className="text-xs text-red-400 mt-1">
+                        ⚠️ Product name cannot be empty
+                      </div>
+                    )}
                   </div>
 
                   <div className="md:col-span-5">
@@ -339,35 +505,78 @@ export default function App() {
                       Amazon Product Listing URL
                     </label>
                     <input
-                      className="w-full rounded-lg bg-slate-900 border border-slate-700 px-3 py-2 focus:ring-2 focus:ring-blue-500"
+                      className={`w-full rounded-lg bg-slate-900 border px-3 py-2 focus:ring-2 focus:ring-blue-500 ${
+                        p.url && !isValidUrl(p.url) 
+                          ? 'border-red-500 focus:ring-red-500' 
+                          : p.url && isValidUrl(p.url)
+                          ? 'border-green-500 focus:ring-green-500'
+                          : 'border-slate-700'
+                      }`}
                       value={p.url}
                       onChange={(e) => updateProduct(pi, "url", e.target.value)}
                       placeholder="https://www.amazon.com/..."
                     />
+                    {p.url && !isValidUrl(p.url) && (
+                      <div className="text-xs text-red-400 mt-1">
+                        ⚠️ Please enter a valid Amazon URL
+                      </div>
+                    )}
+                    {p.url && isValidUrl(p.url) && (
+                      <div className="text-xs text-green-400 mt-1">
+                        ✅ Valid Amazon URL
+                      </div>
+                    )}
                   </div>
 
                   <div className="md:col-span-3">
                     <label className="block text-xs mb-1">Keyword</label>
                     <input
-                      className="w-full rounded-lg bg-slate-900 border border-slate-700 px-3 py-2 focus:ring-2 focus:ring-blue-500"
+                      className={`w-full rounded-lg bg-slate-900 border px-3 py-2 focus:ring-2 focus:ring-blue-500 ${
+                        p.keyword && !p.keyword.trim() 
+                          ? 'border-red-500 focus:ring-red-500' 
+                          : p.keyword && p.keyword.trim()
+                          ? 'border-green-500 focus:ring-green-500'
+                          : 'border-slate-700'
+                      }`}
                       value={p.keyword}
                       onChange={(e) =>
                         updateProduct(pi, "keyword", e.target.value)
                       }
                       placeholder="e.g. hand wipes"
                     />
+                    {p.keyword && !p.keyword.trim() && (
+                      <div className="text-xs text-red-400 mt-1">
+                        ⚠️ Keyword cannot be empty
+                      </div>
+                    )}
                   </div>
 
                   <div className="md:col-span-3">
                     <label className="block text-xs mb-1">Category URL</label>
                     <input
-                      className="w-full rounded-lg bg-slate-900 border border-slate-700 px-3 py-2 focus:ring-2 focus:ring-blue-500"
+                      className={`w-full rounded-lg bg-slate-900 border px-3 py-2 focus:ring-2 focus:ring-blue-500 ${
+                        p.categoryUrl && !isValidUrl(p.categoryUrl) 
+                          ? 'border-red-500 focus:ring-red-500' 
+                          : p.categoryUrl && isValidUrl(p.categoryUrl)
+                          ? 'border-green-500 focus:ring-green-500'
+                          : 'border-slate-700'
+                      }`}
                       value={p.categoryUrl}
                       onChange={(e) =>
                         updateProduct(pi, "categoryUrl", e.target.value)
                       }
                       placeholder="https://www.amazon.com/..."
                     />
+                    {p.categoryUrl && !isValidUrl(p.categoryUrl) && (
+                      <div className="text-xs text-red-400 mt-1">
+                        ⚠️ Please enter a valid Amazon URL
+                      </div>
+                    )}
+                    {p.categoryUrl && isValidUrl(p.categoryUrl) && (
+                      <div className="text-xs text-green-400 mt-1">
+                        ✅ Valid Amazon URL
+                      </div>
+                    )}
                   </div>
 
                   <div className="md:col-span-1 flex items-end">
@@ -428,9 +637,14 @@ export default function App() {
                 <button
                   type="button"
                   onClick={handleSubmit}
-                  className="ml-auto px-4 py-2 rounded-lg bg-green-600 hover:bg-green-700"
+                  disabled={isSubmitting}
+                  className={`ml-auto px-4 py-2 rounded-lg ${
+                    isSubmitting
+                      ? "bg-green-400 opacity-50 cursor-not-allowed"
+                      : "bg-green-600 hover:bg-green-700"
+                  }`}
                 >
-                  Submit all
+                  {isSubmitting ? "Submitting..." : "Submit all"}
                 </button>
               )}
             </div>

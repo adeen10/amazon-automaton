@@ -1,0 +1,218 @@
+{
+  "runs": [
+    {
+      "brand": "Big wipes",
+      "countries": [
+        {
+          "name": "UK",
+          "products": [
+            {
+              "productname": "WILSON NFL Super Grip Composite Footballs",
+              "url": "https://www.amazon.com/Wilson-Super-Grip-Official-Football/dp/B0012SNLJG/ref=sr_1_1?crid=11N4YAPWDPUF1&dib=eyJ2IjoiMSJ9.VFtpRBXpX0rlGNlPl2X6F_ab989t9a323UfwzuNlhpbtkOqD-aubFTI4dAX36PwIXH7cLX7awRpXDQb6-IG3V_VmUb3FmmkC9xgCLVouC3tetG6k0jSvuBtaNGEBvomgUd8jINBfqaATt9DrujyS01gNneur4LpTIpMnZEp4lQwhUdDyH3h6e93SrJZwLtfHfWetsXNSmcodkCPIWGQ7Ma1gOVeqLrBvxsPtvzsMOjisBhY8i0gazoPWVw9_rph6tc4Ycuva4Q0KZtPeMayX1Gl1-AY900Z7aQ1wVcfKEqs.yezBLzNWMR_sl6Maz5gxBkqrSWK93IBjwUEN_UBBmIE&dib_tag=se&keywords=football&qid=1755186151&sprefix=football%2Caps%2C1829&sr=8-1&th=1",
+              "keyword": "football",
+              "categoryUrl": "https://www.amazon.com/s?k=football&crid=11N4YAPWDPUF1&sprefix=football%2Caps%2C1829&ref=nb_sb_noss_1",
+              "result": {
+                "inputs": {
+                  "category_url": "https://www.amazon.com/s?k=football&crid=11N4YAPWDPUF1&sprefix=football%2Caps%2C1829&ref=nb_sb_noss_1",
+                  "product_url": "https://www.amazon.com/Wilson-Super-Grip-Official-Football/dp/B0012SNLJG/ref=sr_1_1?crid=11N4YAPWDPUF1&dib=eyJ2IjoiMSJ9.VFtpRBXpX0rlGNlPl2X6F_ab989t9a323UfwzuNlhpbtkOqD-aubFTI4dAX36PwIXH7cLX7awRpXDQb6-IG3V_VmUb3FmmkC9xgCLVouC3tetG6k0jSvuBtaNGEBvomgUd8jINBfqaATt9DrujyS01gNneur4LpTIpMnZEp4lQwhUdDyH3h6e93SrJZwLtfHfWetsXNSmcodkCPIWGQ7Ma1gOVeqLrBvxsPtvzsMOjisBhY8i0gazoPWVw9_rph6tc4Ycuva4Q0KZtPeMayX1Gl1-AY900Z7aQ1wVcfKEqs.yezBLzNWMR_sl6Maz5gxBkqrSWK93IBjwUEN_UBBmIE&dib_tag=se&keywords=football&qid=1755186151&sprefix=football%2Caps%2C1829&sr=8-1&th=1",
+                  "keyword": "football"
+                },
+                "category_revenue": {
+                  "text": "$4,793,672",
+                  "number": "4793672"
+                },
+                "monthly_revenue": {
+                  "meta": {
+                    "asin": null,
+                    "file_name": "",
+                    "product_url": "",
+                    "parent_level_revenue": 236469.72,
+                    "parent_level_revenue_text": "$236,469.72",
+                    "source_url": "https://www.amazon.com/s?k=football&crid=11N4YAPWDPUF1&sprefix=football%2Caps%2C1829&ref=nb_sb_noss_1",
+                    "saved_csv": "",
+                    "scraped_at": "2025-08-15T13:22:58Z",
+                    "module": "monthlyrev"
+                  }
+                },
+                "competitors_flow": {
+                  "picker_best": {
+                    "product_details": "Fantasy Football Draft Board 2025 Kit - Extra Large Set with 490 Player Labels - 2025-2026 Premium Color Edition",
+                    "url": "https://www.amazon.com/dp/B0F2F6L7K6?psc=1",
+                    "parent_level_revenue": "102,669.33",
+                    "creation_date": "Jul 12, 2025",
+                    "asin": "B0F2F6L7K6",
+                    "brand": "Draft Barons",
+                    "price": "40.87"
+                  },
+                  "raw_result": {
+                    "downloaded_path": "E:\\automation\\ares projects\\amazon automation\\amazon-automation\\apps\\scraper\\exports\\Helium_10_Xray_2025-08-15_20250815_182300.csv",
+                    "picker_best": {
+                      "product_details": "Fantasy Football Draft Board 2025 Kit - Extra Large Set with 490 Player Labels - 2025-2026 Premium Color Edition",
+                      "url": "https://www.amazon.com/dp/B0F2F6L7K6?psc=1",
+                      "parent_level_revenue": "102,669.33",
+                      "creation_date": "Jul 12, 2025",
+                      "asin": "B0F2F6L7K6",
+                      "brand": "Draft Barons",
+                      "price": "40.87"
+                    },
+                    "updated_total_revenue_text": "$4,793,672",
+                    "updated_total_revenue_number": "4793672"
+                  }
+                },
+                "profitability_metrics": {
+                  "fba_fees": {
+                    "text": "$4.99",
+                    "number": "4.99"
+                  },
+                  "storage_fee_jan_sep": {
+                    "text": "$0.06",
+                    "number": "0.06"
+                  },
+                  "storage_fee_oct_dec": {
+                    "text": "$0.15",
+                    "number": "0.15"
+                  },
+                  "product_price": {
+                    "text": "40.87",
+                    "number": "40.87"
+                  }
+                },
+                "keywords_volumes": {
+                  "user_prompt": "football 57967\nfootball accessories 45692\nnerf football 15086\nfootball gear 9757\nyouth football 8180\nwater football 6135\nfootball training equipment 5172\nfootball backplates 4468\nflag football 4129\npool football 4129Aforementioned are the top keywords sorted by search volume.",
+                  "search_volumes": [
+                    57967,
+                    45692,
+                    15086,
+                    9757,
+                    8180,
+                    6135,
+                    5172,
+                    4468,
+                    4129,
+                    4129
+                  ]
+                },
+                "gpt_projection": {
+                  "response": {
+                    "base_total_sales": 192,
+                    "base_total_revenue": 10992.91,
+                    "base_total_profit_start_ads": 4242.88,
+                    "base_total_profit_end_ads": 5207.17,
+                    "low_total_sales": 126,
+                    "low_total_revenue": 7214.09,
+                    "low_total_profit": 2784.39,
+                    "high_total_sales": 271,
+                    "high_total_revenue": 15458.77,
+                    "high_total_profit": 5966.54
+                  }
+                },
+                "errors": []
+              }
+            },
+            {
+              "productname": "Nike Academy Football FZ2966",
+              "url": "https://www.amazon.com/NIKE-Unisex-Adult-Academy-Football-Blackened/dp/B0DBLQGGWV/ref=sr_1_1?dib=eyJ2IjoiMSJ9.fMvEXwDDobQKyHb8bN2vIa9swZN8acN-V2FC0niqgji0aIEDmHtOtP69KSO-Yq84Lq3fW3C6yKHw7cGcoB-dF8zueQ4sk8Q3tOCdPiGy23dSE_2naiedFFEjN1r27N6AxX0lZtHnyHBgduXqErcvEn40fWlInIF1AjkryeMYPzkc0ZNy0A75voRcr5hnu61ylYqCuqF4izcOTGpft9arlitT2tSXdcECi0CChwglFSjx34x8wA8CnDtDFqN4NV-6ux-cI3DkLSmwHxQy4h7L6jz2OYHo_9tsICI8noZBK2M.wGmZLOtX3hxtxNulQlpUwsfE5UOVUnreMUMpn6yrGb8&dib_tag=se&keywords=soccer+ball&qid=1755186233&sr=8-1",
+              "keyword": "soccer ball",
+              "categoryUrl": "https://www.amazon.com/s?k=soccer+ball&ref=nb_sb_noss",
+              "result": {
+                "inputs": {
+                  "category_url": "https://www.amazon.com/s?k=soccer+ball&ref=nb_sb_noss",
+                  "product_url": "https://www.amazon.com/NIKE-Unisex-Adult-Academy-Football-Blackened/dp/B0DBLQGGWV/ref=sr_1_1?dib=eyJ2IjoiMSJ9.fMvEXwDDobQKyHb8bN2vIa9swZN8acN-V2FC0niqgji0aIEDmHtOtP69KSO-Yq84Lq3fW3C6yKHw7cGcoB-dF8zueQ4sk8Q3tOCdPiGy23dSE_2naiedFFEjN1r27N6AxX0lZtHnyHBgduXqErcvEn40fWlInIF1AjkryeMYPzkc0ZNy0A75voRcr5hnu61ylYqCuqF4izcOTGpft9arlitT2tSXdcECi0CChwglFSjx34x8wA8CnDtDFqN4NV-6ux-cI3DkLSmwHxQy4h7L6jz2OYHo_9tsICI8noZBK2M.wGmZLOtX3hxtxNulQlpUwsfE5UOVUnreMUMpn6yrGb8&dib_tag=se&keywords=soccer+ball&qid=1755186233&sr=8-1",
+                  "keyword": "soccer ball"
+                },
+                "category_revenue": {
+                  "text": null,
+                  "number": null
+                },
+                "monthly_revenue": {
+                  "meta": null
+                },
+                "competitors_flow": {
+                  "picker_best": {
+                    "product_details": "Size 5 Soccer Ball, Waterproof PU Leather, Official Match Ball, with Pump & Needles",
+                    "url": "https://www.amazon.com/dp/B0DQHGZS3B?psc=1",
+                    "parent_level_revenue": "36,387.8",
+                    "creation_date": "Dec 14, 2024",
+                    "asin": "B0DQHGZS3B",
+                    "brand": "ZWAW",
+                    "price": "23.39"
+                  },
+                  "raw_result": {
+                    "downloaded_path": "E:\\automation\\ares projects\\amazon automation\\amazon-automation\\apps\\scraper\\exports\\Helium_10_Xray_2025-08-15_20250815_182700.csv",
+                    "picker_best": {
+                      "product_details": "Size 5 Soccer Ball, Waterproof PU Leather, Official Match Ball, with Pump & Needles",
+                      "url": "https://www.amazon.com/dp/B0DQHGZS3B?psc=1",
+                      "parent_level_revenue": "36,387.8",
+                      "creation_date": "Dec 14, 2024",
+                      "asin": "B0DQHGZS3B",
+                      "brand": "ZWAW",
+                      "price": "23.39"
+                    },
+                    "updated_total_revenue_text": "$2,619,061",
+                    "updated_total_revenue_number": "2619061"
+                  }
+                },
+                "profitability_metrics": {
+                  "fba_fees": {
+                    "text": "$7.08",
+                    "number": "7.08"
+                  },
+                  "storage_fee_jan_sep": {
+                    "text": "$0.24",
+                    "number": "0.24"
+                  },
+                  "storage_fee_oct_dec": {
+                    "text": "$0.65",
+                    "number": "0.65"
+                  },
+                  "product_price": {
+                    "text": "23.39",
+                    "number": "23.39"
+                  }
+                },
+                "keywords_volumes": {
+                  "user_prompt": "soccer ball 67606\nsoccer ball size 5 22456\nsize 3 soccer ball 18100\nsize 4 soccer ball 17884\nsoccer ball size 4 15088\nsize 5 soccer ball 10036\nsoccer ball size 3 8424\nsoccer ball bag 4468\nkids soccer ball 3930\nnike soccer ball 3923Aforementioned are the top keywords sorted by search volume.",
+                  "search_volumes": [
+                    67606,
+                    22456,
+                    18100,
+                    17884,
+                    15088,
+                    10036,
+                    8424,
+                    4468,
+                    3930,
+                    3923
+                  ]
+                },
+                "gpt_projection": {
+                  "response": {
+                    "base_total_sales": 257,
+                    "base_total_revenue": 5157.45,
+                    "base_total_profit_start_ads": 2320.85,
+                    "base_total_profit_end_ads": 2836.6,
+                    "low_total_sales": 169,
+                    "low_total_revenue": 3384.58,
+                    "low_total_profit": 1523.06,
+                    "high_total_sales": 362,
+                    "high_total_revenue": 7252.66,
+                    "high_total_profit": 3263.7
+                  }
+                },
+                "errors": [
+                  "category_revenue attempt 1 failed: XRAY not detected on any Amazon tab.",
+                  "category_revenue attempt 2 failed: XRAY not detected on any Amazon tab.",
+                  "category_revenue attempt 3 failed: XRAY not detected on any Amazon tab.",
+                  "category_revenue attempt 4 failed: XRAY not detected on any Amazon tab.",
+                  "category_revenue attempt 5 failed: XRAY not detected on any Amazon tab.",
+                  "run_monthlyrev failed: Could not acquire Parent Level Revenue via CSV or DOM.",
+                  "profitability_metrics attempt 1 failed: Could not find/click the Profitability Calculator button."
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

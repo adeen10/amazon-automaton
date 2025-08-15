@@ -6,6 +6,7 @@ apps/backend/node_modules/
 apps/frontend/.env
 apps/backend/.env
 apps/scraper/.env
+apps/backend/scraper/.env
 
 # scrapper
 apps/scraper/.env.example
