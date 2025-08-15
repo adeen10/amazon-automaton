@@ -43,6 +43,7 @@ The system has three main components:
 cd apps/backend
 npm install
 npm start
+
 ```
 
 ### Frontend Setup
