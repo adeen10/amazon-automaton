@@ -18,63 +18,63 @@
                   "keyword": "football"
                 },
                 "category_revenue": {
-                  "text": "$4,140,915",
-                  "number": "4140915"
+                  "text": "$4,793,672",
+                  "number": "4793672"
                 },
                 "monthly_revenue": {
                   "meta": {
                     "asin": null,
                     "file_name": "",
                     "product_url": "",
-                    "parent_level_revenue": 231767.51,
-                    "parent_level_revenue_text": "$231,767.51",
+                    "parent_level_revenue": 236469.72,
+                    "parent_level_revenue_text": "$236,469.72",
                     "source_url": "https://www.amazon.com/s?k=football&crid=11N4YAPWDPUF1&sprefix=football%2Caps%2C1829&ref=nb_sb_noss_1",
                     "saved_csv": "",
-                    "scraped_at": "2025-08-14T16:04:23Z",
+                    "scraped_at": "2025-08-15T13:22:58Z",
                     "module": "monthlyrev"
                   }
                 },
                 "competitors_flow": {
                   "picker_best": {
-                    "product_details": "SwimWays Hydro Waterproof Football, Outdoor Games for Adults and Kids, Swimming Pool Accessories and Pool Party Games, 9.25 Inches, Green",
-                    "url": "https://www.amazon.com/dp/B0CCW7Q9F5?psc=1",
-                    "parent_level_revenue": "83,091.29",
-                    "creation_date": "Dec 12, 2023",
-                    "asin": "B0CCW7Q9F5",
-                    "brand": "SwimWays",
-                    "price": "12.99"
+                    "product_details": "Fantasy Football Draft Board 2025 Kit - Extra Large Set with 490 Player Labels - 2025-2026 Premium Color Edition",
+                    "url": "https://www.amazon.com/dp/B0F2F6L7K6?psc=1",
+                    "parent_level_revenue": "102,669.33",
+                    "creation_date": "Jul 12, 2025",
+                    "asin": "B0F2F6L7K6",
+                    "brand": "Draft Barons",
+                    "price": "40.87"
                   },
                   "raw_result": {
-                    "downloaded_path": "E:\\automation\\ares projects\\amazon automation\\amazon-automation\\apps\\scraper\\exports\\Helium_10_Xray_2025-08-14_20250814_210425.csv",
+                    "downloaded_path": "E:\\automation\\ares projects\\amazon automation\\amazon-automation\\apps\\scraper\\exports\\Helium_10_Xray_2025-08-15_20250815_182300.csv",
                     "picker_best": {
-                      "product_details": "SwimWays Hydro Waterproof Football, Outdoor Games for Adults and Kids, Swimming Pool Accessories and Pool Party Games, 9.25 Inches, Green",
-                      "url": "https://www.amazon.com/dp/B0CCW7Q9F5?psc=1",
-                      "parent_level_revenue": "83,091.29",
-                      "creation_date": "Dec 12, 2023",
-                      "asin": "B0CCW7Q9F5",
-                      "brand": "SwimWays",
-                      "price": "12.99"
+                      "product_details": "Fantasy Football Draft Board 2025 Kit - Extra Large Set with 490 Player Labels - 2025-2026 Premium Color Edition",
+                      "url": "https://www.amazon.com/dp/B0F2F6L7K6?psc=1",
+                      "parent_level_revenue": "102,669.33",
+                      "creation_date": "Jul 12, 2025",
+                      "asin": "B0F2F6L7K6",
+                      "brand": "Draft Barons",
+                      "price": "40.87"
                     },
-                    "updated_total_revenue_text": "$4,140,915",
-                    "updated_total_revenue_number": "4140915"
+                    "updated_total_revenue_text": "$4,793,672",
+                    "updated_total_revenue_number": "4793672"
                   }
                 },
                 "profitability_metrics": {
                   "fba_fees": {
-                    "text": "$7.88",
-                    "number": "7.88"
+                    "text": "$4.99",
+                    "number": "4.99"
                   },
                   "storage_fee_jan_sep": {
-                    "text": "$0.41",
-                    "number": "0.41"
+                    "text": "$0.06",
+                    "number": "0.06"
                   },
                   "storage_fee_oct_dec": {
-                    "text": "$1.14",
-                    "number": "1.14"
+                    "text": "$0.15",
+                    "number": "0.15"
                   },
                   "product_price": {
-                    "text": "12.99",
-                    "number": "12.99"
+                    "text": "40.87",
+                    "number": "40.87"
                   }
                 },
                 "keywords_volumes": {
@@ -94,21 +94,19 @@
                 },
                 "gpt_projection": {
                   "response": {
-                    "base_total_sales": 241,
-                    "base_total_revenue": 12053.62,
-                    "base_total_profit_start_ads": 4218.77,
-                    "base_total_profit_end_ads": 5424.13,
-                    "low_total_sales": 158,
-                    "low_total_revenue": 7910.19,
-                    "low_total_profit": 2768.57,
-                    "high_total_sales": 339,
-                    "high_total_revenue": 16950.41,
-                    "high_total_profit": 5932.64
+                    "base_total_sales": 192,
+                    "base_total_revenue": 10992.91,
+                    "base_total_profit_start_ads": 4242.88,
+                    "base_total_profit_end_ads": 5207.17,
+                    "low_total_sales": 126,
+                    "low_total_revenue": 7214.09,
+                    "low_total_profit": 2784.39,
+                    "high_total_sales": 271,
+                    "high_total_revenue": 15458.77,
+                    "high_total_profit": 5966.54
                   }
                 },
-                "errors": [
-                  "category_revenue attempt 1 failed: XRAY not detected on any Amazon tab."
-                ]
+                "errors": []
               }
             },
             {
@@ -123,63 +121,53 @@
                   "keyword": "soccer ball"
                 },
                 "category_revenue": {
-                  "text": "$3,538,199",
-                  "number": "3538199"
+                  "text": null,
+                  "number": null
                 },
                 "monthly_revenue": {
-                  "meta": {
-                    "asin": null,
-                    "file_name": "",
-                    "product_url": "",
-                    "parent_level_revenue": 36551.91,
-                    "parent_level_revenue_text": "$36,551.91",
-                    "source_url": "https://www.amazon.com/s?k=soccer+ball&ref=nb_sb_noss",
-                    "saved_csv": "",
-                    "scraped_at": "2025-08-14T16:06:47Z",
-                    "module": "monthlyrev"
-                  }
+                  "meta": null
                 },
                 "competitors_flow": {
                   "picker_best": {
-                    "product_details": "Soccer Ball Size 5&Size 3 for Youth and Adults, Indoor Training Practice Soccer Ball, Gift Idea for Kid with 1 Pump 1 Net Bag and 2 Needle",
-                    "url": "https://www.amazon.com/dp/B0CRBFNTHS?psc=1",
-                    "parent_level_revenue": "47,894.36",
-                    "creation_date": "Jan 2, 2024",
-                    "asin": "B0CRBFNTHS",
-                    "brand": "MGZFEZN",
-                    "price": "19.99"
+                    "product_details": "Size 5 Soccer Ball, Waterproof PU Leather, Official Match Ball, with Pump & Needles",
+                    "url": "https://www.amazon.com/dp/B0DQHGZS3B?psc=1",
+                    "parent_level_revenue": "36,387.8",
+                    "creation_date": "Dec 14, 2024",
+                    "asin": "B0DQHGZS3B",
+                    "brand": "ZWAW",
+                    "price": "23.39"
                   },
                   "raw_result": {
-                    "downloaded_path": "E:\\automation\\ares projects\\amazon automation\\amazon-automation\\apps\\scraper\\exports\\Helium_10_Xray_2025-08-14_20250814_210650.csv",
+                    "downloaded_path": "E:\\automation\\ares projects\\amazon automation\\amazon-automation\\apps\\scraper\\exports\\Helium_10_Xray_2025-08-15_20250815_182700.csv",
                     "picker_best": {
-                      "product_details": "Soccer Ball Size 5&Size 3 for Youth and Adults, Indoor Training Practice Soccer Ball, Gift Idea for Kid with 1 Pump 1 Net Bag and 2 Needle",
-                      "url": "https://www.amazon.com/dp/B0CRBFNTHS?psc=1",
-                      "parent_level_revenue": "47,894.36",
-                      "creation_date": "Jan 2, 2024",
-                      "asin": "B0CRBFNTHS",
-                      "brand": "MGZFEZN",
-                      "price": "19.99"
+                      "product_details": "Size 5 Soccer Ball, Waterproof PU Leather, Official Match Ball, with Pump & Needles",
+                      "url": "https://www.amazon.com/dp/B0DQHGZS3B?psc=1",
+                      "parent_level_revenue": "36,387.8",
+                      "creation_date": "Dec 14, 2024",
+                      "asin": "B0DQHGZS3B",
+                      "brand": "ZWAW",
+                      "price": "23.39"
                     },
-                    "updated_total_revenue_text": "$3,538,199",
-                    "updated_total_revenue_number": "3538199"
+                    "updated_total_revenue_text": "$2,619,061",
+                    "updated_total_revenue_number": "2619061"
                   }
                 },
                 "profitability_metrics": {
                   "fba_fees": {
-                    "text": "$5.87",
-                    "number": "5.87"
+                    "text": "$7.08",
+                    "number": "7.08"
                   },
                   "storage_fee_jan_sep": {
-                    "text": "$0.14",
-                    "number": "0.14"
+                    "text": "$0.24",
+                    "number": "0.24"
                   },
                   "storage_fee_oct_dec": {
-                    "text": "$0.39",
-                    "number": "0.39"
+                    "text": "$0.65",
+                    "number": "0.65"
                   },
                   "product_price": {
-                    "text": "19.99",
-                    "number": "19.99"
+                    "text": "23.39",
+                    "number": "23.39"
                   }
                 },
                 "keywords_volumes": {
@@ -199,19 +187,27 @@
                 },
                 "gpt_projection": {
                   "response": {
-                    "base_total_sales": 103,
-                    "base_total_revenue": 2578.72,
-                    "base_total_profit_start_ads": 825.19,
-                    "base_total_profit_end_ads": 1031.49,
-                    "low_total_sales": 67,
-                    "low_total_revenue": 1692.29,
-                    "low_total_profit": 541.53,
-                    "high_total_sales": 145,
-                    "high_total_revenue": 3626.33,
-                    "high_total_profit": 1160.43
+                    "base_total_sales": 257,
+                    "base_total_revenue": 5157.45,
+                    "base_total_profit_start_ads": 2320.85,
+                    "base_total_profit_end_ads": 2836.6,
+                    "low_total_sales": 169,
+                    "low_total_revenue": 3384.58,
+                    "low_total_profit": 1523.06,
+                    "high_total_sales": 362,
+                    "high_total_revenue": 7252.66,
+                    "high_total_profit": 3263.7
                   }
                 },
-                "errors": []
+                "errors": [
+                  "category_revenue attempt 1 failed: XRAY not detected on any Amazon tab.",
+                  "category_revenue attempt 2 failed: XRAY not detected on any Amazon tab.",
+                  "category_revenue attempt 3 failed: XRAY not detected on any Amazon tab.",
+                  "category_revenue attempt 4 failed: XRAY not detected on any Amazon tab.",
+                  "category_revenue attempt 5 failed: XRAY not detected on any Amazon tab.",
+                  "run_monthlyrev failed: Could not acquire Parent Level Revenue via CSV or DOM.",
+                  "profitability_metrics attempt 1 failed: Could not find/click the Profitability Calculator button."
+                ]
               }
             }
           ]

@@ -2,7 +2,6 @@
 import os, re, time, json
 from typing import Dict, Any, List, Tuple
 from playwright.sync_api import Browser
-
 from helium_boot import boot_and_xray
 from getCategoryRev import get_category_revenue
 from competitors import run_competitors_flow
@@ -10,7 +9,7 @@ from monthlyrev import run_monthlyrev
 from profitcal import get_profitability_metrics
 from cerebro import open_amazon_page, open_cerebro_from_xray, cerebro_search, export_cerebro_csv
 from gpt import get_keywords_volumes_from_csv, get_gpt_response
-
+from sheet_writer import write_results_to_country_tabs
 # ---------------------------
 # ENV / CONSTANTS
 # ---------------------------
@@ -48,7 +47,7 @@ def open_with_xray(
         ctx = browser.new_context()
     else:
         ctx = browser.contexts[0]
-
+    
     popup_url = f"chrome-extension://{ext_id}/popup.html"
     popup = ctx.new_page()
     popup.goto(popup_url, wait_until="domcontentloaded")
@@ -405,5 +404,15 @@ if __name__ == "__main__":
     # Persist full run snapshot
     with open("full_runs.json", "w", encoding="utf-8") as f:
         json.dump(results, f, ensure_ascii=False, indent=2)
-
+        
     print("[DONE] All runs complete. Saved to full_runs.json")
+    
+    
+    print("\n[Info] Logging to googlesheet")
+    try:
+        write_results_to_country_tabs(results)
+    except Exception as e:
+        print("Error logging to sheets:", e)
+
+
+
