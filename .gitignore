@@ -7,6 +7,9 @@ apps/frontend/.env
 apps/backend/.env
 apps/scraper/.env
 
+# scrapper
+apps/scraper/.env.example
+apps/scraper/.env
 # Python cache
 __pycache__/
 
