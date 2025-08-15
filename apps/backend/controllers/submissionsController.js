@@ -7,6 +7,8 @@ const {
   copyFormatReq,
   batchUpdate,
 } = require("../sheets-helpers");
+const { spawn } = require('child_process');
+const path = require('path');
 
 const VALID_COUNTRIES = ["US", "UK", "CAN", "AUS", "DE", "UAE"];
 
@@ -25,69 +27,81 @@ exports.createSubmission = async (req, res) => {
       return res.status(400).json({ error: "No brands provided" });
     }
 
-    // Build country -> items
-    const map = new Map();
-    for (const b of brands) {
-      for (const c of b.countries || []) {
-        const country = normalizeCountry(c.name);
-        if (!VALID_COUNTRIES.includes(country)) {
-          console.warn("Skipping invalid/unknown country:", c.name);
-          continue;
-        }
-        const list = map.get(country) || [];
-        for (const p of c.products || []) {
-          list.push({
-            categoryUrl: p.categoryUrl || "",
-            productUrl: p.url || "",
-            productName: p.productname || p.name || "Product",
-          });
-        }
-        map.set(country, list);
-      }
+    // Validate and prepare payload for scraper
+    const scraperPayload = {
+      brands: brands.map(brand => ({
+        brand: brand.brand || brand.name || "",
+        countries: (brand.countries || []).map(country => ({
+          name: normalizeCountry(country.name),
+          products: (country.products || []).map(product => ({
+            productname: product.productname || product.name || "",
+            url: product.url || "",
+            keyword: product.keyword || "",
+            categoryUrl: product.categoryUrl || ""
+          }))
+        }))
+      }))
+    };
+
+    // Filter out invalid countries
+    scraperPayload.brands = scraperPayload.brands.map(brand => ({
+      ...brand,
+      countries: brand.countries.filter(country => 
+        VALID_COUNTRIES.includes(country.name)
+      )
+    })).filter(brand => brand.countries.length > 0);
+
+    if (scraperPayload.brands.length === 0) {
+      return res.status(400).json({ error: "No valid countries found" });
     }
 
-    // Order by sheet tab sequence
-    const countries = Array.from(map.keys()).sort(
-      (a, b) => VALID_COUNTRIES.indexOf(a) - VALID_COUNTRIES.indexOf(b)
-    );
+    console.log("Prepared scraper payload:", JSON.stringify(scraperPayload, null, 2));
 
-    console.log("Will write countries:", countries);
+    // Start the scraper process in the background
+    const scraperScriptPath = path.join(__dirname, '../scraper/run_scraper.py');
+    const pythonProcess = spawn('python', [scraperScriptPath], {
+      stdio: ['pipe', 'pipe', 'pipe'],
+      cwd: path.dirname(scraperScriptPath),
+      detached: true // Run in background
+    });
 
-    const results = [];
-    for (const country of countries) {
-      if (!country) continue;
-      const items = map.get(country);
-      if (!items || !items.length) continue;
+    // Send payload to Python process
+    pythonProcess.stdin.write(JSON.stringify(scraperPayload));
+    pythonProcess.stdin.end();
 
-      const startRow = await getNextRowFromA(country);
-      const rows = items.map((it, i) => [
-        startRow - 3 + 1 + i,
-        HYPER(it.categoryUrl, "link"),
-        HYPER(it.productUrl, it.productName),
-      ]);
+    // Detach the process so it runs independently
+    pythonProcess.unref();
 
-      await writeRowsAt(country, startRow, rows);
-      const { sheetId, columnCount } = await getSheetMeta(country);
-      const lastRow1 = startRow + rows.length - 1;
-      const lastRow0 = lastRow1 - 1;
+    // Respond immediately to frontend
+    console.log('Scraper started successfully in background');
+    res.json({ 
+      ok: true, 
+      message: 'Scraper started successfully in the background',
+      payload: scraperPayload
+    });
 
-      await batchUpdate([
-        insertRowBelowReq(sheetId, lastRow0),
-        copyFormatReq(sheetId, lastRow0, lastRow0 + 1, columnCount),
-      ]);
+    // Handle process events for logging (but don't wait for response)
+    pythonProcess.stdout.on('data', (data) => {
+      const message = data.toString();
+      console.log('Scraper output:', message);
+    });
 
-      results.push({
-        country,
-        added: rows.length,
-        fromNo: rows[0][0],
-        toNo: rows[rows.length - 1][0],
-      });
-    }
+    pythonProcess.stderr.on('data', (data) => {
+      const errorMessage = data.toString();
+      console.error('Scraper error:', errorMessage);
+    });
 
-    return res.json({ ok: true, results });
+    pythonProcess.on('close', (code) => {
+      console.log(`Scraper process completed with code: ${code}`);
+    });
+
+    pythonProcess.on('error', (error) => {
+      console.error('Failed to start scraper:', error);
+    });
+
   } catch (e) {
-    console.error("Sheets write failed:", e?.response?.data || e);
-    return res.status(500).json({ error: "Sheets write failed" });
+    console.error("Submission processing failed:", e);
+    return res.status(500).json({ error: "Submission processing failed", details: e.message });
   }
 };
 
