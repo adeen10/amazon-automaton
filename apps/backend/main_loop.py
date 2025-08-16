@@ -13,10 +13,10 @@ from sheet_writer import write_results_to_country_tabs
 # ---------------------------
 # ENV / CONSTANTS
 # ---------------------------
-# USERNAME = "Al-Wajid Laptops"
-USERNAME = "Hurai"
-# CHROME_PATH   = rf"C:\Users\{USERNAME}\AppData\Local\Google\Chrome\Application\chrome.exe"
-CHROME_PATH   = r"C:\Program Files\Google\Chrome\Application\chrome.exe"
+USERNAME = "Al-Wajid Laptops"
+# USERNAME = "Hurai"
+CHROME_PATH   = rf"C:\Users\{USERNAME}\AppData\Local\Google\Chrome\Application\chrome.exe"
+# CHROME_PATH   = r"C:\Program Files\Google\Chrome\Application\chrome.exe"
 USER_DATA_DIR = rf"C:\Users\{USERNAME}\automation-profile"
 PROFILE_DIR   = "Profile 4"
 EXT_ID        = "njmehopjdpcckochcggncklnlmikcbnb"

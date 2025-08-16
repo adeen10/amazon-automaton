@@ -4,7 +4,7 @@
       "brand": "Big wipes",
       "countries": [
         {
-          "name": "UK",
+          "name": "US",
           "products": [
             {
               "productname": "WILSON NFL Super Grip Composite Footballs",
@@ -18,63 +18,63 @@
                   "keyword": "football"
                 },
                 "category_revenue": {
-                  "text": "$4,793,672",
-                  "number": "4793672"
+                  "text": null,
+                  "number": null
                 },
                 "monthly_revenue": {
                   "meta": {
                     "asin": null,
                     "file_name": "",
                     "product_url": "",
-                    "parent_level_revenue": 236469.72,
-                    "parent_level_revenue_text": "$236,469.72",
+                    "parent_level_revenue": 179734.73,
+                    "parent_level_revenue_text": "$179,734.73",
                     "source_url": "https://www.amazon.com/s?k=football&crid=11N4YAPWDPUF1&sprefix=football%2Caps%2C1829&ref=nb_sb_noss_1",
                     "saved_csv": "",
-                    "scraped_at": "2025-08-15T13:22:58Z",
+                    "scraped_at": "2025-08-15T17:33:34Z",
                     "module": "monthlyrev"
                   }
                 },
                 "competitors_flow": {
                   "picker_best": {
-                    "product_details": "Fantasy Football Draft Board 2025 Kit - Extra Large Set with 490 Player Labels - 2025-2026 Premium Color Edition",
-                    "url": "https://www.amazon.com/dp/B0F2F6L7K6?psc=1",
-                    "parent_level_revenue": "102,669.33",
-                    "creation_date": "Jul 12, 2025",
-                    "asin": "B0F2F6L7K6",
-                    "brand": "Draft Barons",
-                    "price": "40.87"
+                    "product_details": "Battle Sports Defender Football Shoulder Pads – The Lightest, Most Protective in Its Class – Aerospace Grade Materials, Ventilated Design, Removable Sternum Plate, Foam Neck Roll",
+                    "url": "https://www.amazon.com/dp/B0F28SWDV5?psc=1",
+                    "parent_level_revenue": "221,450.84",
+                    "creation_date": "Mar 26, 2025",
+                    "asin": "B0F28SWDV5",
+                    "brand": "Battle",
+                    "price": "159.99"
                   },
                   "raw_result": {
-                    "downloaded_path": "E:\\automation\\ares projects\\amazon automation\\amazon-automation\\apps\\scraper\\exports\\Helium_10_Xray_2025-08-15_20250815_182300.csv",
+                    "downloaded_path": "E:\\automation\\ares projects\\amazon automation\\amazon-automation\\apps\\backend\\exports\\Helium_10_Xray_2025-08-15_20250815_223337.csv",
                     "picker_best": {
-                      "product_details": "Fantasy Football Draft Board 2025 Kit - Extra Large Set with 490 Player Labels - 2025-2026 Premium Color Edition",
-                      "url": "https://www.amazon.com/dp/B0F2F6L7K6?psc=1",
-                      "parent_level_revenue": "102,669.33",
-                      "creation_date": "Jul 12, 2025",
-                      "asin": "B0F2F6L7K6",
-                      "brand": "Draft Barons",
-                      "price": "40.87"
+                      "product_details": "Battle Sports Defender Football Shoulder Pads – The Lightest, Most Protective in Its Class – Aerospace Grade Materials, Ventilated Design, Removable Sternum Plate, Foam Neck Roll",
+                      "url": "https://www.amazon.com/dp/B0F28SWDV5?psc=1",
+                      "parent_level_revenue": "221,450.84",
+                      "creation_date": "Mar 26, 2025",
+                      "asin": "B0F28SWDV5",
+                      "brand": "Battle",
+                      "price": "159.99"
                     },
-                    "updated_total_revenue_text": "$4,793,672",
-                    "updated_total_revenue_number": "4793672"
+                    "updated_total_revenue_text": "$2,570,942",
+                    "updated_total_revenue_number": "2570942"
                   }
                 },
                 "profitability_metrics": {
                   "fba_fees": {
-                    "text": "$4.99",
-                    "number": "4.99"
+                    "text": "$10.28",
+                    "number": "10.28"
                   },
                   "storage_fee_jan_sep": {
-                    "text": "$0.06",
-                    "number": "0.06"
+                    "text": "$0.94",
+                    "number": "0.94"
                   },
                   "storage_fee_oct_dec": {
-                    "text": "$0.15",
-                    "number": "0.15"
+                    "text": "$2.60",
+                    "number": "2.60"
                   },
                   "product_price": {
-                    "text": "40.87",
-                    "number": "40.87"
+                    "text": "159.99",
+                    "number": "159.99"
                   }
                 },
                 "keywords_volumes": {
@@ -94,109 +94,7 @@
                 },
                 "gpt_projection": {
                   "response": {
-                    "base_total_sales": 192,
-                    "base_total_revenue": 10992.91,
-                    "base_total_profit_start_ads": 4242.88,
-                    "base_total_profit_end_ads": 5207.17,
-                    "low_total_sales": 126,
-                    "low_total_revenue": 7214.09,
-                    "low_total_profit": 2784.39,
-                    "high_total_sales": 271,
-                    "high_total_revenue": 15458.77,
-                    "high_total_profit": 5966.54
-                  }
-                },
-                "errors": []
-              }
-            },
-            {
-              "productname": "Nike Academy Football FZ2966",
-              "url": "https://www.amazon.com/NIKE-Unisex-Adult-Academy-Football-Blackened/dp/B0DBLQGGWV/ref=sr_1_1?dib=eyJ2IjoiMSJ9.fMvEXwDDobQKyHb8bN2vIa9swZN8acN-V2FC0niqgji0aIEDmHtOtP69KSO-Yq84Lq3fW3C6yKHw7cGcoB-dF8zueQ4sk8Q3tOCdPiGy23dSE_2naiedFFEjN1r27N6AxX0lZtHnyHBgduXqErcvEn40fWlInIF1AjkryeMYPzkc0ZNy0A75voRcr5hnu61ylYqCuqF4izcOTGpft9arlitT2tSXdcECi0CChwglFSjx34x8wA8CnDtDFqN4NV-6ux-cI3DkLSmwHxQy4h7L6jz2OYHo_9tsICI8noZBK2M.wGmZLOtX3hxtxNulQlpUwsfE5UOVUnreMUMpn6yrGb8&dib_tag=se&keywords=soccer+ball&qid=1755186233&sr=8-1",
-              "keyword": "soccer ball",
-              "categoryUrl": "https://www.amazon.com/s?k=soccer+ball&ref=nb_sb_noss",
-              "result": {
-                "inputs": {
-                  "category_url": "https://www.amazon.com/s?k=soccer+ball&ref=nb_sb_noss",
-                  "product_url": "https://www.amazon.com/NIKE-Unisex-Adult-Academy-Football-Blackened/dp/B0DBLQGGWV/ref=sr_1_1?dib=eyJ2IjoiMSJ9.fMvEXwDDobQKyHb8bN2vIa9swZN8acN-V2FC0niqgji0aIEDmHtOtP69KSO-Yq84Lq3fW3C6yKHw7cGcoB-dF8zueQ4sk8Q3tOCdPiGy23dSE_2naiedFFEjN1r27N6AxX0lZtHnyHBgduXqErcvEn40fWlInIF1AjkryeMYPzkc0ZNy0A75voRcr5hnu61ylYqCuqF4izcOTGpft9arlitT2tSXdcECi0CChwglFSjx34x8wA8CnDtDFqN4NV-6ux-cI3DkLSmwHxQy4h7L6jz2OYHo_9tsICI8noZBK2M.wGmZLOtX3hxtxNulQlpUwsfE5UOVUnreMUMpn6yrGb8&dib_tag=se&keywords=soccer+ball&qid=1755186233&sr=8-1",
-                  "keyword": "soccer ball"
-                },
-                "category_revenue": {
-                  "text": null,
-                  "number": null
-                },
-                "monthly_revenue": {
-                  "meta": null
-                },
-                "competitors_flow": {
-                  "picker_best": {
-                    "product_details": "Size 5 Soccer Ball, Waterproof PU Leather, Official Match Ball, with Pump & Needles",
-                    "url": "https://www.amazon.com/dp/B0DQHGZS3B?psc=1",
-                    "parent_level_revenue": "36,387.8",
-                    "creation_date": "Dec 14, 2024",
-                    "asin": "B0DQHGZS3B",
-                    "brand": "ZWAW",
-                    "price": "23.39"
-                  },
-                  "raw_result": {
-                    "downloaded_path": "E:\\automation\\ares projects\\amazon automation\\amazon-automation\\apps\\scraper\\exports\\Helium_10_Xray_2025-08-15_20250815_182700.csv",
-                    "picker_best": {
-                      "product_details": "Size 5 Soccer Ball, Waterproof PU Leather, Official Match Ball, with Pump & Needles",
-                      "url": "https://www.amazon.com/dp/B0DQHGZS3B?psc=1",
-                      "parent_level_revenue": "36,387.8",
-                      "creation_date": "Dec 14, 2024",
-                      "asin": "B0DQHGZS3B",
-                      "brand": "ZWAW",
-                      "price": "23.39"
-                    },
-                    "updated_total_revenue_text": "$2,619,061",
-                    "updated_total_revenue_number": "2619061"
-                  }
-                },
-                "profitability_metrics": {
-                  "fba_fees": {
-                    "text": "$7.08",
-                    "number": "7.08"
-                  },
-                  "storage_fee_jan_sep": {
-                    "text": "$0.24",
-                    "number": "0.24"
-                  },
-                  "storage_fee_oct_dec": {
-                    "text": "$0.65",
-                    "number": "0.65"
-                  },
-                  "product_price": {
-                    "text": "23.39",
-                    "number": "23.39"
-                  }
-                },
-                "keywords_volumes": {
-                  "user_prompt": "soccer ball 67606\nsoccer ball size 5 22456\nsize 3 soccer ball 18100\nsize 4 soccer ball 17884\nsoccer ball size 4 15088\nsize 5 soccer ball 10036\nsoccer ball size 3 8424\nsoccer ball bag 4468\nkids soccer ball 3930\nnike soccer ball 3923Aforementioned are the top keywords sorted by search volume.",
-                  "search_volumes": [
-                    67606,
-                    22456,
-                    18100,
-                    17884,
-                    15088,
-                    10036,
-                    8424,
-                    4468,
-                    3930,
-                    3923
-                  ]
-                },
-                "gpt_projection": {
-                  "response": {
-                    "base_total_sales": 257,
-                    "base_total_revenue": 5157.45,
-                    "base_total_profit_start_ads": 2320.85,
-                    "base_total_profit_end_ads": 2836.6,
-                    "low_total_sales": 169,
-                    "low_total_revenue": 3384.58,
-                    "low_total_profit": 1523.06,
-                    "high_total_sales": 362,
-                    "high_total_revenue": 7252.66,
-                    "high_total_profit": 3263.7
+                    "Error": "Error during API call: Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}"
                   }
                 },
                 "errors": [
@@ -205,8 +103,8 @@
                   "category_revenue attempt 3 failed: XRAY not detected on any Amazon tab.",
                   "category_revenue attempt 4 failed: XRAY not detected on any Amazon tab.",
                   "category_revenue attempt 5 failed: XRAY not detected on any Amazon tab.",
-                  "run_monthlyrev failed: Could not acquire Parent Level Revenue via CSV or DOM.",
-                  "profitability_metrics attempt 1 failed: Could not find/click the Profitability Calculator button."
+                  "profitability_metrics attempt 1 failed: Profitability Calculator UI did not appear in 25s. Last error: Missing selector for 'storage_fee_jan_sep': div[data-testid=\"calculator-profitability-storageFeeJanSep\"]\n\n[DEBUG SNIPPET]\nSkip to\nMain content\nAbout this item\nBuying options\nVideos\nReviews\nKeyboard shortcuts\nSearch\nalt\n+\n/\nCart\nshift\n+\nalt\n+\nC\nHome\nshift\n+\nalt\n+\nH\nOrders\nshift\n+\nalt\n+\nO\nAdd to cart\nshift\n+\nalt\n+\nK\nShow/Hide shortcuts\nshift\n+\nalt\n+\nZ\nTo move between items, use your keyboard's up or down arrows.\nDeliver to\nUnited Kingdom\nAll\nAll Departments\nArts & Crafts\nAutomotive\nBaby\nBeauty & Personal Care\nBooks\nBoys' Fashion\nComputers\nDeals\nDigital Music\nElectronics\nGirls' Fashion\nHealth & Household\nHome & Kitchen\nIndustrial & Scientific\nKindle Store\nLuggage\nMen's Fashion\nMovies & TV\nMusic, CDs & Vinyl\nPet Supplies\nPrime Video\nSoftware\nSports & Outdoors\nTools & Home Improvement\nToys & Games\nVideo Games\nWomen's Fashion\nEN\nHello, sign in\nAccount & Lists\nReturns\n& Orders\n0\nCart\nWe're showing you items that ship to United Kingdom. To see items that ship to a different country, change your delivery address.\nDismiss\n \nChange Address\nAll\nToday's Deals\nPrime Video\nRegistry\nCustomer Service\nGift Cards\nSell\nDisability Customer Support\nProduct summary presents key product information \nKeyboard shortcut  shift + alt + D\nSports & Outdoors\n›\nSports\n›\nTeam Sports\n›\nFootball\n›\nProtective Gear\n›\nProtective Padding\n›…",
+                  "cerebro attempt 1 failed: Cerebro page not detected in same-tab or elsewhere."
                 ]
               }
             }

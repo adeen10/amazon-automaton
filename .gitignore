@@ -11,6 +11,7 @@ apps/backend/scraper/.env
 # scrapper
 apps/scraper/.env.example
 apps/scraper/.env
+.env
 # Python cache
 __pycache__/
 
