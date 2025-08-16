@@ -1,111 +1,103 @@
 {
   "runs": [
     {
-      "brand": "Big wipes",
+      "brand": "adeen2",
       "countries": [
         {
           "name": "US",
           "products": [
             {
-              "productname": "WILSON NFL Super Grip Composite Footballs",
-              "url": "https://www.amazon.com/Wilson-Super-Grip-Official-Football/dp/B0012SNLJG/ref=sr_1_1?crid=11N4YAPWDPUF1&dib=eyJ2IjoiMSJ9.VFtpRBXpX0rlGNlPl2X6F_ab989t9a323UfwzuNlhpbtkOqD-aubFTI4dAX36PwIXH7cLX7awRpXDQb6-IG3V_VmUb3FmmkC9xgCLVouC3tetG6k0jSvuBtaNGEBvomgUd8jINBfqaATt9DrujyS01gNneur4LpTIpMnZEp4lQwhUdDyH3h6e93SrJZwLtfHfWetsXNSmcodkCPIWGQ7Ma1gOVeqLrBvxsPtvzsMOjisBhY8i0gazoPWVw9_rph6tc4Ycuva4Q0KZtPeMayX1Gl1-AY900Z7aQ1wVcfKEqs.yezBLzNWMR_sl6Maz5gxBkqrSWK93IBjwUEN_UBBmIE&dib_tag=se&keywords=football&qid=1755186151&sprefix=football%2Caps%2C1829&sr=8-1&th=1",
-              "keyword": "football",
-              "categoryUrl": "https://www.amazon.com/s?k=football&crid=11N4YAPWDPUF1&sprefix=football%2Caps%2C1829&ref=nb_sb_noss_1",
+              "productname": "SNICKERS, TWIX, & MILKY WAY Minis Chocolate Candy Bars Variety Pack, 150 Ct Bulk Bag",
+              "url": "https://www.amazon.com/MILKY-SNICKERS-Original-Minis-Candy/dp/B0CHXYTJS9/ref=sr_1_1?crid=1SVK5JELJ5CJ6&dib=eyJ2IjoiMSJ9.E9ldPDRdgYnfFKtOnRO44KeoFMyiVyrlMldYnaiJnqrcc8hgTARGQesgfV_p5dHkTfJhEWOBwzyUvSR7Ot7lomBmI8x4DrCo0rX0oSm8PKZrYGWUG26t3hPhSv3bExmUrWlkU_NUnMi4Tzf2lUDTXOynxDY59oilU0SzbzH5ApE6LpoGnDgjzD8sfSblIIlDVvdG0mvIMkxCuOEramvgHcmyKGM75Zs8LyQm760fZ67OrWoZKOCCL3a0eoYbOyW0BZF2C4ZayencqIgf_2r7iKonp6GbhDRTHnCtlCqNgps.hxYMlq_TCFPK6ydUJm_nRhJIkEU-i0z61Yr-6sd4E8w&dib_tag=se&keywords=candy&qid=1755351397&sprefix=cricket%2Bbat%2Caps%2C2290&sr=8-1&th=1",
+              "keyword": "candy",
+              "categoryUrl": "https://www.amazon.com/s?k=candy&crid=1SVK5JELJ5CJ6&sprefix=cricket+bat%2Caps%2C2290&ref=nb_sb_noss_1",
               "result": {
                 "inputs": {
-                  "category_url": "https://www.amazon.com/s?k=football&crid=11N4YAPWDPUF1&sprefix=football%2Caps%2C1829&ref=nb_sb_noss_1",
-                  "product_url": "https://www.amazon.com/Wilson-Super-Grip-Official-Football/dp/B0012SNLJG/ref=sr_1_1?crid=11N4YAPWDPUF1&dib=eyJ2IjoiMSJ9.VFtpRBXpX0rlGNlPl2X6F_ab989t9a323UfwzuNlhpbtkOqD-aubFTI4dAX36PwIXH7cLX7awRpXDQb6-IG3V_VmUb3FmmkC9xgCLVouC3tetG6k0jSvuBtaNGEBvomgUd8jINBfqaATt9DrujyS01gNneur4LpTIpMnZEp4lQwhUdDyH3h6e93SrJZwLtfHfWetsXNSmcodkCPIWGQ7Ma1gOVeqLrBvxsPtvzsMOjisBhY8i0gazoPWVw9_rph6tc4Ycuva4Q0KZtPeMayX1Gl1-AY900Z7aQ1wVcfKEqs.yezBLzNWMR_sl6Maz5gxBkqrSWK93IBjwUEN_UBBmIE&dib_tag=se&keywords=football&qid=1755186151&sprefix=football%2Caps%2C1829&sr=8-1&th=1",
-                  "keyword": "football"
+                  "category_url": "https://www.amazon.com/s?k=candy&crid=1SVK5JELJ5CJ6&sprefix=cricket+bat%2Caps%2C2290&ref=nb_sb_noss_1",
+                  "product_url": "https://www.amazon.com/MILKY-SNICKERS-Original-Minis-Candy/dp/B0CHXYTJS9/ref=sr_1_1?crid=1SVK5JELJ5CJ6&dib=eyJ2IjoiMSJ9.E9ldPDRdgYnfFKtOnRO44KeoFMyiVyrlMldYnaiJnqrcc8hgTARGQesgfV_p5dHkTfJhEWOBwzyUvSR7Ot7lomBmI8x4DrCo0rX0oSm8PKZrYGWUG26t3hPhSv3bExmUrWlkU_NUnMi4Tzf2lUDTXOynxDY59oilU0SzbzH5ApE6LpoGnDgjzD8sfSblIIlDVvdG0mvIMkxCuOEramvgHcmyKGM75Zs8LyQm760fZ67OrWoZKOCCL3a0eoYbOyW0BZF2C4ZayencqIgf_2r7iKonp6GbhDRTHnCtlCqNgps.hxYMlq_TCFPK6ydUJm_nRhJIkEU-i0z61Yr-6sd4E8w&dib_tag=se&keywords=candy&qid=1755351397&sprefix=cricket%2Bbat%2Caps%2C2290&sr=8-1&th=1",
+                  "keyword": "candy"
                 },
                 "category_revenue": {
-                  "text": null,
-                  "number": null
+                  "text": "$8,891,994",
+                  "number": "8891994"
                 },
                 "monthly_revenue": {
                   "meta": {
                     "asin": null,
                     "file_name": "",
                     "product_url": "",
-                    "parent_level_revenue": 179734.73,
-                    "parent_level_revenue_text": "$179,734.73",
-                    "source_url": "https://www.amazon.com/s?k=football&crid=11N4YAPWDPUF1&sprefix=football%2Caps%2C1829&ref=nb_sb_noss_1",
+                    "parent_level_revenue": 203936.08,
+                    "parent_level_revenue_text": "$203,936.08",
+                    "source_url": "https://www.amazon.com/s?k=candy&crid=1SVK5JELJ5CJ6&sprefix=cricket+bat%2Caps%2C2290&ref=nb_sb_noss_1",
                     "saved_csv": "",
-                    "scraped_at": "2025-08-15T17:33:34Z",
+                    "scraped_at": "2025-08-16T23:50:07Z",
                     "module": "monthlyrev"
                   }
                 },
                 "competitors_flow": {
                   "picker_best": {
-                    "product_details": "Battle Sports Defender Football Shoulder Pads – The Lightest, Most Protective in Its Class – Aerospace Grade Materials, Ventilated Design, Removable Sternum Plate, Foam Neck Roll",
-                    "url": "https://www.amazon.com/dp/B0F28SWDV5?psc=1",
-                    "parent_level_revenue": "221,450.84",
-                    "creation_date": "Mar 26, 2025",
-                    "asin": "B0F28SWDV5",
-                    "brand": "Battle",
-                    "price": "159.99"
+                    "product_details": "SKITTLES POP'd Sour Freeze Dried Candy, 5.5 Oz Resealable Candy Bag",
+                    "url": "https://www.amazon.com/dp/B0DLLGVBWV?psc=1",
+                    "parent_level_revenue": "58,686.1",
+                    "creation_date": "Oct 31, 2024",
+                    "asin": "B0DLLGVBWV",
+                    "brand": "Skittles",
+                    "price": "5.96"
                   },
                   "raw_result": {
-                    "downloaded_path": "E:\\automation\\ares projects\\amazon automation\\amazon-automation\\apps\\backend\\exports\\Helium_10_Xray_2025-08-15_20250815_223337.csv",
+                    "downloaded_path": "E:\\automation\\ares projects\\amazon automation\\amazon-automation\\apps\\backend\\exports\\Helium_10_Xray_2025-08-16_20250817_045009.csv",
                     "picker_best": {
-                      "product_details": "Battle Sports Defender Football Shoulder Pads – The Lightest, Most Protective in Its Class – Aerospace Grade Materials, Ventilated Design, Removable Sternum Plate, Foam Neck Roll",
-                      "url": "https://www.amazon.com/dp/B0F28SWDV5?psc=1",
-                      "parent_level_revenue": "221,450.84",
-                      "creation_date": "Mar 26, 2025",
-                      "asin": "B0F28SWDV5",
-                      "brand": "Battle",
-                      "price": "159.99"
+                      "product_details": "SKITTLES POP'd Sour Freeze Dried Candy, 5.5 Oz Resealable Candy Bag",
+                      "url": "https://www.amazon.com/dp/B0DLLGVBWV?psc=1",
+                      "parent_level_revenue": "58,686.1",
+                      "creation_date": "Oct 31, 2024",
+                      "asin": "B0DLLGVBWV",
+                      "brand": "Skittles",
+                      "price": "5.96"
                     },
-                    "updated_total_revenue_text": "$2,570,942",
-                    "updated_total_revenue_number": "2570942"
+                    "updated_total_revenue_text": "$8,891,994",
+                    "updated_total_revenue_number": "8891994"
                   }
                 },
                 "profitability_metrics": {
                   "fba_fees": {
-                    "text": "$10.28",
-                    "number": "10.28"
+                    "text": "$3.38",
+                    "number": "3.38"
                   },
                   "storage_fee_jan_sep": {
-                    "text": "$0.94",
-                    "number": "0.94"
+                    "text": "$0.05",
+                    "number": "0.05"
                   },
                   "storage_fee_oct_dec": {
-                    "text": "$2.60",
-                    "number": "2.60"
+                    "text": "$0.14",
+                    "number": "0.14"
                   },
                   "product_price": {
-                    "text": "159.99",
-                    "number": "159.99"
+                    "text": "0",
+                    "number": "0"
                   }
                 },
                 "keywords_volumes": {
-                  "user_prompt": "football 57967\nfootball accessories 45692\nnerf football 15086\nfootball gear 9757\nyouth football 8180\nwater football 6135\nfootball training equipment 5172\nfootball backplates 4468\nflag football 4129\npool football 4129Aforementioned are the top keywords sorted by search volume.",
+                  "user_prompt": "candy 354876\ncandy variety pack 79586\nbulk candy 59976\nchocolate candy 53154\ncandy bulk 50428\nbulk candy individually wrapped 27219\nhalloween candy 27214\ncandy bars 23330\nchocolate candy variety pack 18674\nindividually wrapped candy 18491Aforementioned are the top keywords sorted by search volume.",
                   "search_volumes": [
-                    57967,
-                    45692,
-                    15086,
-                    9757,
-                    8180,
-                    6135,
-                    5172,
-                    4468,
-                    4129,
-                    4129
+                    354876,
+                    79586,
+                    59976,
+                    53154,
+                    50428,
+                    27219,
+                    27214,
+                    23330,
+                    18674,
+                    18491
                   ]
                 },
                 "gpt_projection": {
                   "response": {
-                    "Error": "Error during API call: Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}"
+                    "Error": "Error during API call: Error code: 401 - {'error': {'message': 'Incorrect API key provided: sk-proj-********************************************************************************************************************************************************f-IA. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}"
                   }
                 },
-                "errors": [
-                  "category_revenue attempt 1 failed: XRAY not detected on any Amazon tab.",
-                  "category_revenue attempt 2 failed: XRAY not detected on any Amazon tab.",
-                  "category_revenue attempt 3 failed: XRAY not detected on any Amazon tab.",
-                  "category_revenue attempt 4 failed: XRAY not detected on any Amazon tab.",
-                  "category_revenue attempt 5 failed: XRAY not detected on any Amazon tab.",
-                  "profitability_metrics attempt 1 failed: Profitability Calculator UI did not appear in 25s. Last error: Missing selector for 'storage_fee_jan_sep': div[data-testid=\"calculator-profitability-storageFeeJanSep\"]\n\n[DEBUG SNIPPET]\nSkip to\nMain content\nAbout this item\nBuying options\nVideos\nReviews\nKeyboard shortcuts\nSearch\nalt\n+\n/\nCart\nshift\n+\nalt\n+\nC\nHome\nshift\n+\nalt\n+\nH\nOrders\nshift\n+\nalt\n+\nO\nAdd to cart\nshift\n+\nalt\n+\nK\nShow/Hide shortcuts\nshift\n+\nalt\n+\nZ\nTo move between items, use your keyboard's up or down arrows.\nDeliver to\nUnited Kingdom\nAll\nAll Departments\nArts & Crafts\nAutomotive\nBaby\nBeauty & Personal Care\nBooks\nBoys' Fashion\nComputers\nDeals\nDigital Music\nElectronics\nGirls' Fashion\nHealth & Household\nHome & Kitchen\nIndustrial & Scientific\nKindle Store\nLuggage\nMen's Fashion\nMovies & TV\nMusic, CDs & Vinyl\nPet Supplies\nPrime Video\nSoftware\nSports & Outdoors\nTools & Home Improvement\nToys & Games\nVideo Games\nWomen's Fashion\nEN\nHello, sign in\nAccount & Lists\nReturns\n& Orders\n0\nCart\nWe're showing you items that ship to United Kingdom. To see items that ship to a different country, change your delivery address.\nDismiss\n \nChange Address\nAll\nToday's Deals\nPrime Video\nRegistry\nCustomer Service\nGift Cards\nSell\nDisability Customer Support\nProduct summary presents key product information \nKeyboard shortcut  shift + alt + D\nSports & Outdoors\n›\nSports\n›\nTeam Sports\n›\nFootball\n›\nProtective Gear\n›\nProtective Padding\n›…",
-                  "cerebro attempt 1 failed: Cerebro page not detected in same-tab or elsewhere."
-                ]
+                "errors": []
               }
             }
           ]

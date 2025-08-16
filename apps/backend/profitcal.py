@@ -218,7 +218,7 @@ def get_profitability_metrics(
     browser: Browser,
     *,
     product_url: str,
-    wait_secs: int = 25,
+    wait_secs: int = 60,
     close_all_tabs_first: bool = False,
     close_others_after_open: bool = True,
 ) -> Dict[str, Dict[str, str]]:

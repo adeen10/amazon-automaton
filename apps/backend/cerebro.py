@@ -90,7 +90,7 @@ def open_amazon_page(ctx, url: str, wait_until: str = "domcontentloaded"):
 def _wait_for_url_contains(page, needle: str, timeout_ms: int = 30000):
     page.wait_for_url(lambda u: needle in str(u), timeout=timeout_ms)
 
-def open_cerebro_from_xray(browser, amazon_page, asin: str, timeout_s: int = 35):
+def open_cerebro_from_xray(browser, amazon_page, asin: str, timeout_s: int = 60):
     """
     Clicks the Cerebro link on the product page and returns the Cerebro Page.
     Handles both popup (new tab) and same-tab navigation.

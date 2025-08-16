@@ -15,51 +15,133 @@ from sheet_writer import write_results_to_country_tabs
 # QUEUE MANAGEMENT
 # ---------------------------
 QUEUE_FILE = "queue.json"
+FAILED_QUEUE_FILE = "failed_queue.json"
+LOCK_FILE = "queue.lock"
+
 scraper_running = False
+queue_draining = False  # guard to avoid nested drains
+
+LOCK_TIMEOUT_SEC = 15
+LOCK_RETRY_MS = 100
+
+def _acquire_lock(timeout_sec: int = LOCK_TIMEOUT_SEC, retry_ms: int = LOCK_RETRY_MS):
+    """Create a lock file exclusively; retry until timeout."""
+    deadline = time.time() + timeout_sec
+    while True:
+        try:
+            fd = os.open(LOCK_FILE, os.O_CREAT | os.O_EXCL | os.O_RDWR)
+            os.write(fd, str(os.getpid()).encode("utf-8"))
+            return fd
+        except FileExistsError:
+            if time.time() > deadline:
+                raise TimeoutError("[QUEUE] Could not acquire lock")
+            time.sleep(retry_ms / 1000.0)
+
+
+def _release_lock(fd: int):
+    """Remove lock file and close FD."""
+    try:
+        os.close(fd)
+    finally:
+        try:
+            os.remove(LOCK_FILE)
+        except FileNotFoundError:
+            pass
+
+
+def _safe_read_json(path: str):
+    if not os.path.exists(path):
+        return []
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            return json.load(f)
+    except Exception:
+        # Corrupt file fallback
+        return []
+
+
+def _safe_write_json(path: str, data):
+    tmp = f"{path}.tmp"
+    with open(tmp, "w", encoding="utf-8") as f:
+        json.dump(data, f, ensure_ascii=False, indent=2)
+    os.replace(tmp, path)  # atomic on same filesystem
+
 
 def is_scraper_running():
-    """Check if scraper is currently running"""
     global scraper_running
     return scraper_running
 
+
 def set_scraper_running(status: bool):
-    """Set scraper running status"""
     global scraper_running
     scraper_running = status
 
+
 def add_to_queue(payload: Dict[str, Any]):
-    """Add payload to queue file"""
+    """Append payload atomically under lock."""
     try:
-        queue_data = []
-        if os.path.exists(QUEUE_FILE):
-            with open(QUEUE_FILE, 'r', encoding='utf-8') as f:
-                queue_data = json.load(f)
-        
-        queue_data.append(payload)
-        
-        with open(QUEUE_FILE, 'w', encoding='utf-8') as f:
-            json.dump(queue_data, f, ensure_ascii=False, indent=2)
-        
-        print(f"[QUEUE] Added payload to queue. Queue size: {len(queue_data)}")
-        return True
+        fd = _acquire_lock()
+        try:
+            queue_data = _safe_read_json(QUEUE_FILE)
+            # optional: initialize a retry counter if you want later
+            if "retries" not in payload:
+                payload["retries"] = 0
+            queue_data.append(payload)
+            _safe_write_json(QUEUE_FILE, queue_data)
+            print(f"[QUEUE] Added payload. New size: {len(queue_data)}")
+            return True
+        finally:
+            _release_lock(fd)
     except Exception as e:
         print(f"[QUEUE ERROR] Failed to add to queue: {e}")
         return False
 
+
 def get_queue():
-    """Get all items from queue"""
+    """Read current queue (non-locking read for informational purposes)."""
     try:
-        if not os.path.exists(QUEUE_FILE):
-            return []
-        
-        with open(QUEUE_FILE, 'r', encoding='utf-8') as f:
-            return json.load(f)
+        return _safe_read_json(QUEUE_FILE)
     except Exception as e:
         print(f"[QUEUE ERROR] Failed to read queue: {e}")
         return []
 
+
+def _pop_next_queue_item():
+    """Atomically pop the next item from the queue (FIFO). Returns None if empty."""
+    fd = _acquire_lock()
+    try:
+        queue_data = _safe_read_json(QUEUE_FILE)
+        if not queue_data:
+            return None
+        item = queue_data.pop(0)
+        if queue_data:
+            _safe_write_json(QUEUE_FILE, queue_data)
+        else:
+            # queue now empty; remove file to avoid stale re-reads
+            try:
+                os.remove(QUEUE_FILE)
+            except FileNotFoundError:
+                pass
+        return item
+    finally:
+        _release_lock(fd)
+
+
+def _push_failed_item(payload: Dict[str, Any], err_msg: str):
+    """Record failures for visibility/retry; does not requeue automatically."""
+    payload = dict(payload)
+    payload["error"] = err_msg
+    fd = _acquire_lock()
+    try:
+        failed = _safe_read_json(FAILED_QUEUE_FILE)
+        failed.append(payload)
+        _safe_write_json(FAILED_QUEUE_FILE, failed)
+    finally:
+        _release_lock(fd)
+
+
 def clear_queue():
-    """Clear the queue file"""
+    """Remove queue file (rarely needed now)."""
     try:
         if os.path.exists(QUEUE_FILE):
             os.remove(QUEUE_FILE)
@@ -69,35 +151,137 @@ def clear_queue():
         print(f"[QUEUE ERROR] Failed to clear queue: {e}")
         return False
 
+
 def process_queue():
-    """Process all items in queue"""
-    queue_items = get_queue()
-    if not queue_items:
-        print("[QUEUE] No items in queue to process")
+    """Drain queue one item at a time with per-item commit. No re-entrancy."""
+    global queue_draining
+    if queue_draining:
+        print("[QUEUE] Drain already in progress; skipping.")
         return
+
+    queue_draining = True
+    try:
+        processed = 0
+        failed = 0
+
+        # quick peek for log
+        initial = len(get_queue())
+        if initial == 0:
+            print("[QUEUE] No items in queue to process")
+            return
+        print(f"[QUEUE] Draining {initial} item(s)")
+
+        while True:
+            payload = _pop_next_queue_item()  # <-- per-item commit
+            if payload is None:
+                break
+
+            idx = processed + failed + 1
+            print(f"[QUEUE] Processing item {idx}")
+
+            try:
+                # VERY IMPORTANT: mark as from_queue to prevent re-entrancy
+                result = run_scraper_main(payload, from_queue=True)
+                if result.get("success"):
+                    print(f"[QUEUE] Item {idx} processed successfully")
+                    processed += 1
+                else:
+                    msg = result.get("error", "Unknown error")
+                    print(f"[QUEUE] Item {idx} failed: {msg}")
+                    failed += 1
+                    _push_failed_item(payload, msg)
+            except Exception as e:
+                print(f"[QUEUE] Item {idx} failed with exception: {e}")
+                failed += 1
+                _push_failed_item(payload, str(e))
+
+        print(f"[QUEUE] Drain complete. Successful: {processed}, Failed: {failed}")
+
+    finally:
+        queue_draining = False
+
+# def is_scraper_running():
+#     """Check if scraper is currently running"""
+#     global scraper_running
+#     return scraper_running
+
+# def set_scraper_running(status: bool):
+#     """Set scraper running status"""
+#     global scraper_running
+#     scraper_running = status
+
+# def add_to_queue(payload: Dict[str, Any]):
+#     """Add payload to queue file"""
+#     try:
+#         queue_data = []
+#         if os.path.exists(QUEUE_FILE):
+#             with open(QUEUE_FILE, 'r', encoding='utf-8') as f:
+#                 queue_data = json.load(f)
+        
+#         queue_data.append(payload)
+        
+#         with open(QUEUE_FILE, 'w', encoding='utf-8') as f:
+#             json.dump(queue_data, f, ensure_ascii=False, indent=2)
+        
+#         print(f"[QUEUE] Added payload to queue. Queue size: {len(queue_data)}")
+#         return True
+#     except Exception as e:
+#         print(f"[QUEUE ERROR] Failed to add to queue: {e}")
+#         return False
+
+# def get_queue():
+#     """Get all items from queue"""
+#     try:
+#         if not os.path.exists(QUEUE_FILE):
+#             return []
+        
+#         with open(QUEUE_FILE, 'r', encoding='utf-8') as f:
+#             return json.load(f)
+#     except Exception as e:
+#         print(f"[QUEUE ERROR] Failed to read queue: {e}")
+#         return []
+
+# def clear_queue():
+#     """Clear the queue file"""
+#     try:
+#         if os.path.exists(QUEUE_FILE):
+#             os.remove(QUEUE_FILE)
+#             print("[QUEUE] Queue cleared")
+#         return True
+#     except Exception as e:
+#         print(f"[QUEUE ERROR] Failed to clear queue: {e}")
+#         return False
+
+# def process_queue():
+#     """Process all items in queue"""
+#     queue_items = get_queue()
+#     if not queue_items:
+#         print("[QUEUE] No items in queue to process")
+#         return
     
-    print(f"[QUEUE] Processing {len(queue_items)} items from queue")
+#     print(f"[QUEUE] Processing {len(queue_items)} items from queue")
     
-    successful_items = 0
-    failed_items = 0
+#     successful_items = 0
+#     failed_items = 0
     
-    for i, payload in enumerate(queue_items):
-        print(f"[QUEUE] Processing item {i+1}/{len(queue_items)}")
-        try:
-            result = run_scraper_main(payload)
-            if result["success"]:
-                print(f"[QUEUE] Item {i+1} processed successfully")
-                successful_items += 1
-            else:
-                print(f"[QUEUE] Item {i+1} failed: {result.get('error', 'Unknown error')}")
-                failed_items += 1
-        except Exception as e:
-            print(f"[QUEUE] Item {i+1} failed with exception: {e}")
-            failed_items += 1
+#     for i, payload in enumerate(queue_items):
+#         print(f"[QUEUE] Processing item {i+1}/{len(queue_items)}")
+#         try:
+#             result = run_scraper_main(payload)
+#             if result["success"]:
+#                 print(f"[QUEUE] Item {i+1} processed successfully")
+#                 successful_items += 1
+                
+#             else:
+#                 print(f"[QUEUE] Item {i+1} failed: {result.get('error', 'Unknown error')}")
+#                 failed_items += 1
+#         except Exception as e:
+#             print(f"[QUEUE] Item {i+1} failed with exception: {e}")
+#             failed_items += 1
     
-    # Clear queue after processing
-    clear_queue()
-    print(f"[QUEUE] Queue processing complete. Successful: {successful_items}, Failed: {failed_items}")
+#     # Clear queue after processing
+#     clear_queue()
+#     print(f"[QUEUE] Queue processing complete. Successful: {successful_items}, Failed: {failed_items}")
 
 # ---------------------------
 # ENV / CONSTANTS
@@ -117,7 +301,7 @@ MONTHLY_REV_DOWNLOAD_DIR   = os.path.join(BASE_EXPORT_DIR, "monthlyrev")
 for d in [CEREBRO_DOWNLOAD_DIR, COMPETITORS_DOWNLOAD_DIR, MONTHLY_REV_DOWNLOAD_DIR]:
     os.makedirs(d, exist_ok=True)
 
-MAX_RETRIES = 5
+MAX_RETRIES = 8
 
 # ---------------------------
 # XRAY opener (unchanged)
@@ -127,7 +311,7 @@ def open_with_xray(
     *,
     ext_id: str,
     target_url: str,
-    wait_secs: int = 20,
+    wait_secs: int = 50,
     popup_visible: bool = False
 ):
     """
@@ -197,7 +381,7 @@ def run_single_product(
         ext_id=EXT_ID,
         target_url=category_url,
         cdp_port=9666,
-        wait_secs=20
+        wait_secs=60
     )
     print("[ok] boot complete; XRAY should be running.")
 
@@ -226,7 +410,7 @@ def run_single_product(
     for attempt in range(1, MAX_RETRIES + 1):
         try:
             print("[Info] Getting Category Revenue")
-            rev = get_category_revenue(browser, wait_after_click_ms=15000)
+            rev = get_category_revenue(browser, wait_after_click_ms=60000)
             run_results["category_revenue"]["text"]   = rev.get("text")
             run_results["category_revenue"]["number"] = rev.get("number")
             break
@@ -248,7 +432,7 @@ def run_single_product(
                     ext_id=EXT_ID,
                     target_url=category_url,
                     cdp_port=9666,
-                    wait_secs=20
+                    wait_secs=60
                 )
             if attempt == MAX_RETRIES:
                 print("[ERROR] Category revenue: max retries reached.")
@@ -256,7 +440,7 @@ def run_single_product(
     # ---- Monthly revenue for THIS product ----
     try:
         print("[Info] Opening product for monthly revenue + profit calc.")
-        open_with_xray(browser, ext_id=EXT_ID, target_url=product_url, wait_secs=20, popup_visible=False)
+        open_with_xray(browser, ext_id=EXT_ID, target_url=product_url, wait_secs=50, popup_visible=False)
     except Exception as e:
         msg = f"open_with_xray(product) failed: {e}"
         print("[ERROR]", msg)
@@ -321,7 +505,7 @@ def run_single_product(
                 metrics = get_profitability_metrics(
                     browser,
                     product_url=COMPETITOR_PRODUCT_URL,
-                    wait_secs=25,
+                    wait_secs=60,
                     close_all_tabs_first=False,
                     close_others_after_open=True,
                 )
@@ -348,7 +532,7 @@ def run_single_product(
             try:
                 print("[Info] Cerebro flow.")
                 product_page = open_amazon_page(ctx, product_url)
-                cerebro_tab = open_cerebro_from_xray(browser, product_page, ASIN, timeout_s=35)
+                cerebro_tab = open_cerebro_from_xray(browser, product_page, ASIN, timeout_s=60)
                 cerebro_search(cerebro_tab, keyword)
 
                 csv_path = export_cerebro_csv(
@@ -461,53 +645,99 @@ def process_brands(payload: Dict[str, Any]) -> Dict[str, Any]:
 # ---------------------------
 # Main function for backend integration
 # ---------------------------
-def run_scraper_main(payload):
+
+def run_scraper_main(payload, *, from_queue: bool = False):
     """
     Main function to run the scraper with payload from backend
     Returns: dict with results and status
     """
-    # Set scraper as running
     set_scraper_running(True)
-    
     try:
         print(f"[INFO] Starting scraper with {len(payload.get('brands', []))} brands")
-        
+
         results = process_brands(payload)
 
-        # Persist full run snapshot
         with open("full_runs.json", "w", encoding="utf-8") as f:
             json.dump(results, f, ensure_ascii=False, indent=2)
-            
+
         print("[DONE] All runs complete. Saved to full_runs.json")
-        
+
         print("\n[Info] Logging to googlesheet")
         try:
             write_results_to_country_tabs(results)
             print("[SUCCESS] Results logged to Google Sheets")
         except Exception as e:
             print(f"[WARNING] Error logging to sheets: {e}")
-            
+
         return {
             "success": True,
             "results": results,
-            "message": "Scraper completed successfully"
+            "message": "Scraper completed successfully",
         }
-            
+
     except Exception as e:
         error_msg = f"[ERROR] Failed to process brands: {e}"
         print(error_msg)
         return {
             "success": False,
             "error": str(e),
-            "message": "Scraper failed"
+            "message": "Scraper failed",
         }
+
     finally:
-        # Set scraper as not running
         set_scraper_running(False)
+        # Only trigger a drain if this run wasn't itself started by process_queue()
+        if not from_queue:
+            print("[INFO] Checking for queued items...")
+            process_queue()
+
+# def run_scraper_main(payload):
+#     """
+#     Main function to run the scraper with payload from backend
+#     Returns: dict with results and status
+#     """
+#     # Set scraper as running
+#     set_scraper_running(True)
+    
+#     try:
+#         print(f"[INFO] Starting scraper with {len(payload.get('brands', []))} brands")
         
-        # Process any items in queue
-        print("[INFO] Checking for queued items...")
-        process_queue()
+#         results = process_brands(payload)
+
+#         # Persist full run snapshot
+#         with open("full_runs.json", "w", encoding="utf-8") as f:
+#             json.dump(results, f, ensure_ascii=False, indent=2)
+            
+#         print("[DONE] All runs complete. Saved to full_runs.json")
+        
+#         print("\n[Info] Logging to googlesheet")
+#         try:
+#             write_results_to_country_tabs(results)
+#             print("[SUCCESS] Results logged to Google Sheets")
+#         except Exception as e:
+#             print(f"[WARNING] Error logging to sheets: {e}")
+            
+#         return {
+#             "success": True,
+#             "results": results,
+#             "message": "Scraper completed successfully"
+#         }
+            
+#     except Exception as e:
+#         error_msg = f"[ERROR] Failed to process brands: {e}"
+#         print(error_msg)
+#         return {
+#             "success": False,
+#             "error": str(e),
+#             "message": "Scraper failed"
+#         }
+#     finally:
+#         # Set scraper as not running
+#         set_scraper_running(False)
+        
+#         # Process any items in queue
+#         print("[INFO] Checking for queued items...")
+#         process_queue()
 
 # ---------------------------
 # Standalone entrypoint (for testing)
