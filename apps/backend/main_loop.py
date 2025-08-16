@@ -10,6 +10,95 @@ from profitcal import get_profitability_metrics
 from cerebro import open_amazon_page, open_cerebro_from_xray, cerebro_search, export_cerebro_csv
 from gpt import get_keywords_volumes_from_csv, get_gpt_response
 from sheet_writer import write_results_to_country_tabs
+
+# ---------------------------
+# QUEUE MANAGEMENT
+# ---------------------------
+QUEUE_FILE = "queue.json"
+scraper_running = False
+
+def is_scraper_running():
+    """Check if scraper is currently running"""
+    global scraper_running
+    return scraper_running
+
+def set_scraper_running(status: bool):
+    """Set scraper running status"""
+    global scraper_running
+    scraper_running = status
+
+def add_to_queue(payload: Dict[str, Any]):
+    """Add payload to queue file"""
+    try:
+        queue_data = []
+        if os.path.exists(QUEUE_FILE):
+            with open(QUEUE_FILE, 'r', encoding='utf-8') as f:
+                queue_data = json.load(f)
+        
+        queue_data.append(payload)
+        
+        with open(QUEUE_FILE, 'w', encoding='utf-8') as f:
+            json.dump(queue_data, f, ensure_ascii=False, indent=2)
+        
+        print(f"[QUEUE] Added payload to queue. Queue size: {len(queue_data)}")
+        return True
+    except Exception as e:
+        print(f"[QUEUE ERROR] Failed to add to queue: {e}")
+        return False
+
+def get_queue():
+    """Get all items from queue"""
+    try:
+        if not os.path.exists(QUEUE_FILE):
+            return []
+        
+        with open(QUEUE_FILE, 'r', encoding='utf-8') as f:
+            return json.load(f)
+    except Exception as e:
+        print(f"[QUEUE ERROR] Failed to read queue: {e}")
+        return []
+
+def clear_queue():
+    """Clear the queue file"""
+    try:
+        if os.path.exists(QUEUE_FILE):
+            os.remove(QUEUE_FILE)
+            print("[QUEUE] Queue cleared")
+        return True
+    except Exception as e:
+        print(f"[QUEUE ERROR] Failed to clear queue: {e}")
+        return False
+
+def process_queue():
+    """Process all items in queue"""
+    queue_items = get_queue()
+    if not queue_items:
+        print("[QUEUE] No items in queue to process")
+        return
+    
+    print(f"[QUEUE] Processing {len(queue_items)} items from queue")
+    
+    successful_items = 0
+    failed_items = 0
+    
+    for i, payload in enumerate(queue_items):
+        print(f"[QUEUE] Processing item {i+1}/{len(queue_items)}")
+        try:
+            result = run_scraper_main(payload)
+            if result["success"]:
+                print(f"[QUEUE] Item {i+1} processed successfully")
+                successful_items += 1
+            else:
+                print(f"[QUEUE] Item {i+1} failed: {result.get('error', 'Unknown error')}")
+                failed_items += 1
+        except Exception as e:
+            print(f"[QUEUE] Item {i+1} failed with exception: {e}")
+            failed_items += 1
+    
+    # Clear queue after processing
+    clear_queue()
+    print(f"[QUEUE] Queue processing complete. Successful: {successful_items}, Failed: {failed_items}")
+
 # ---------------------------
 # ENV / CONSTANTS
 # ---------------------------
@@ -377,6 +466,9 @@ def run_scraper_main(payload):
     Main function to run the scraper with payload from backend
     Returns: dict with results and status
     """
+    # Set scraper as running
+    set_scraper_running(True)
+    
     try:
         print(f"[INFO] Starting scraper with {len(payload.get('brands', []))} brands")
         
@@ -409,6 +501,13 @@ def run_scraper_main(payload):
             "error": str(e),
             "message": "Scraper failed"
         }
+    finally:
+        # Set scraper as not running
+        set_scraper_running(False)
+        
+        # Process any items in queue
+        print("[INFO] Checking for queued items...")
+        process_queue()
 
 # ---------------------------
 # Standalone entrypoint (for testing)
