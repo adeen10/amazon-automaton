@@ -9,7 +9,7 @@ import sys
 from pathlib import Path
 
 # Import scraper functions directly from current directory
-from main_loop import run_scraper_main
+from main_loop import run_scraper_main, is_scraper_running, add_to_queue
 
 app = FastAPI(title="Amazon Automation API", version="1.0.0")
 
@@ -59,6 +59,16 @@ async def health_check():
     """Health check endpoint"""
     return {"ok": True}
 
+@app.get("/api/scraper-status")
+async def get_scraper_status():
+    """Get current scraper status"""
+    from main_loop import get_queue
+    queue_items = get_queue()
+    return {
+        "running": is_scraper_running(),
+        "queue_size": len(queue_items)
+    }
+
 @app.post("/api/submissions", response_model=SubmissionResponse)
 async def create_submission(request: SubmissionRequest):
     """Create a new submission and start the scraper"""
@@ -102,29 +112,43 @@ async def create_submission(request: SubmissionRequest):
 
         print("Prepared scraper payload:", json.dumps(scraper_payload, indent=2))
 
-        # Start scraper in background
-        import threading
-        
-        def run_scraper_background():
-            try:
-                print("Starting scraper in background...")
-                result = run_scraper_main(scraper_payload)
-                print("Scraper completed:", result)
-            except Exception as e:
-                print(f"Scraper error: {e}")
+        # Check if scraper is already running
+        if is_scraper_running():
+            print("Scraper is currently running, adding to queue")
+            
+            # Add to queue
+            if add_to_queue(scraper_payload):
+                return SubmissionResponse(
+                    ok=True,
+                    message="Data submitted to queue, will start processing once scraper is free",
+                    payload=scraper_payload
+                )
+            else:
+                raise HTTPException(status_code=500, detail="Failed to add to queue")
+        else:
+            # Start scraper in background
+            import threading
+            
+            def run_scraper_background():
+                try:
+                    print("Starting scraper in background...")
+                    result = run_scraper_main(scraper_payload)
+                    print("Scraper completed:", result)
+                except Exception as e:
+                    print(f"Scraper error: {e}")
 
-        # Start scraper in background thread
-        scraper_thread = threading.Thread(target=run_scraper_background)
-        scraper_thread.daemon = True
-        scraper_thread.start()
+            # Start scraper in background thread
+            scraper_thread = threading.Thread(target=run_scraper_background)
+            scraper_thread.daemon = True
+            scraper_thread.start()
 
-        print("Scraper started successfully in background")
-        
-        return SubmissionResponse(
-            ok=True,
-            message="Scraper started successfully in the background",
-            payload=scraper_payload
-        )
+            print("Scraper started successfully in background")
+            
+            return SubmissionResponse(
+                ok=True,
+                message="Scraper started successfully in the background",
+                payload=scraper_payload
+            )
 
     except HTTPException:
         raise

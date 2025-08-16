@@ -271,7 +271,13 @@ export default function App() {
       
       if (response.ok) {
         console.log("SUBMIT SUCCESS", result);
-        alert("✅ Submitted successfully! The scraper is now running in the background.");
+        
+        // Show appropriate message based on response
+        if (result.message && result.message.includes("queue")) {
+          alert("✅ " + result.message);
+        } else {
+          alert("✅ Submitted successfully! The scraper is now running in the background.");
+        }
         
         // Reset to step 1 after successful submission
         setStep(1);
