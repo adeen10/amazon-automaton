@@ -1,5 +1,10 @@
 import { useMemo, useState } from "react";
 
+/* ---------- configuration ---------- */
+// Change this to your VPS IP address and port
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:4000";
+const API_KEY = import.meta.env.VITE_API_KEY || "";
+
 /* ---------- helpers ---------- */
 const COUNTRY_OPTIONS = ["US", "UK", "CAN", "DE", "AUS", "UAE"];
 const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
@@ -261,9 +266,12 @@ export default function App() {
     try {
       console.log("Submitting payload:", payload);
       
-      const response = await fetch("http://localhost:4000/api/submissions", {
+      const response = await fetch(`${API_BASE_URL}/api/submissions`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { 
+          "Content-Type": "application/json",
+          "X-API-Key": API_KEY
+        },
         body: JSON.stringify(payload),
       });
 
