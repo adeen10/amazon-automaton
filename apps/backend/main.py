@@ -183,4 +183,5 @@ async def create_submission(request: SubmissionRequest, api_key: str = Depends(v
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=4000, access_log=True)
+    # uvicorn.run(app, host="0.0.0.0", port=4000, access_log=True)
+    uvicorn.run(app, host="::", port=4000, access_log=True)

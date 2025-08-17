@@ -287,16 +287,16 @@ def process_queue():
 # ENV / CONSTANTS
 # ---------------------------
 # Copy-Item "C:\Users\Administrator\AppData\Local\Google\Chrome\User Data\Default" "C:\Users\Administrator\automation-profile" -Recurse
-# USERNAME = "Al-Wajid Laptops"
+USERNAME = "Al-Wajid Laptops"
 # USERNAME = "Hurai"
-USERNAME = 'Administrator'
-# CHROME_PATH   = rf"C:\Users\{USERNAME}\AppData\Local\Google\Chrome\Application\chrome.exe"
+# USERNAME = 'Administrator'
+CHROME_PATH   = rf"C:\Users\{USERNAME}\AppData\Local\Google\Chrome\Application\chrome.exe"
 # CHROME_PATH   = r"C:\Program Files\Google\Chrome\Application\chrome.exe"
 # USER_DATA_DIR = rf"C:\Users\{USERNAME}\AppData\Local\Google\Chrome\User Data"
 # # USER_DATA_DIR = rf"C:\Users\{USERNAME}\automation-profile"
 # PROFILE_DIR   = "Profile 1"
 
-CHROME_PATH = r"C:\Program Files\Google\Chrome\Application\chrome.exe"
+# CHROME_PATH = r"C:\Program Files\Google\Chrome\Application\chrome.exe"
 USER_DATA_DIR = r"C:\cdp-profile\automation"  # new, dedicated folder
 PROFILE_DIR   = "Default"                      # fresh dir uses "Default"
 
