@@ -200,99 +200,30 @@ def process_queue():
     finally:
         queue_draining = False
 
-# def is_scraper_running():
-#     """Check if scraper is currently running"""
-#     global scraper_running
-#     return scraper_running
-
-# def set_scraper_running(status: bool):
-#     """Set scraper running status"""
-#     global scraper_running
-#     scraper_running = status
-
-# def add_to_queue(payload: Dict[str, Any]):
-#     """Add payload to queue file"""
-#     try:
-#         queue_data = []
-#         if os.path.exists(QUEUE_FILE):
-#             with open(QUEUE_FILE, 'r', encoding='utf-8') as f:
-#                 queue_data = json.load(f)
-        
-#         queue_data.append(payload)
-        
-#         with open(QUEUE_FILE, 'w', encoding='utf-8') as f:
-#             json.dump(queue_data, f, ensure_ascii=False, indent=2)
-        
-#         print(f"[QUEUE] Added payload to queue. Queue size: {len(queue_data)}")
-#         return True
-#     except Exception as e:
-#         print(f"[QUEUE ERROR] Failed to add to queue: {e}")
-#         return False
-
-# def get_queue():
-#     """Get all items from queue"""
-#     try:
-#         if not os.path.exists(QUEUE_FILE):
-#             return []
-        
-#         with open(QUEUE_FILE, 'r', encoding='utf-8') as f:
-#             return json.load(f)
-#     except Exception as e:
-#         print(f"[QUEUE ERROR] Failed to read queue: {e}")
-#         return []
-
-# def clear_queue():
-#     """Clear the queue file"""
-#     try:
-#         if os.path.exists(QUEUE_FILE):
-#             os.remove(QUEUE_FILE)
-#             print("[QUEUE] Queue cleared")
-#         return True
-#     except Exception as e:
-#         print(f"[QUEUE ERROR] Failed to clear queue: {e}")
-#         return False
-
-# def process_queue():
-#     """Process all items in queue"""
-#     queue_items = get_queue()
-#     if not queue_items:
-#         print("[QUEUE] No items in queue to process")
-#         return
-    
-#     print(f"[QUEUE] Processing {len(queue_items)} items from queue")
-    
-#     successful_items = 0
-#     failed_items = 0
-    
-#     for i, payload in enumerate(queue_items):
-#         print(f"[QUEUE] Processing item {i+1}/{len(queue_items)}")
-#         try:
-#             result = run_scraper_main(payload)
-#             if result["success"]:
-#                 print(f"[QUEUE] Item {i+1} processed successfully")
-#                 successful_items += 1
-                
-#             else:
-#                 print(f"[QUEUE] Item {i+1} failed: {result.get('error', 'Unknown error')}")
-#                 failed_items += 1
-#         except Exception as e:
-#             print(f"[QUEUE] Item {i+1} failed with exception: {e}")
-#             failed_items += 1
-    
-#     # Clear queue after processing
-#     clear_queue()
-#     print(f"[QUEUE] Queue processing complete. Successful: {successful_items}, Failed: {failed_items}")
 
 # ---------------------------
 # ENV / CONSTANTS
 # ---------------------------
+# USERNAME = "Al-Wajid Laptops"
+# USERNAME = "Hurai"
+# CHROME_PATH   = rf"C:\Users\{USERNAME}\AppData\Local\Google\Chrome\Application\chrome.exe"
+# CHROME_PATH   = r"C:\Program Files\Google\Chrome\Application\chrome.exe"
+# USER_DATA_DIR = rf"C:\Users\{USERNAME}\automation-profile"
+# PROFILE_DIR   = "Profile 4"
+EXT_ID        = "njmehopjdpcckochcggncklnlmikcbnb"
+
 USERNAME = "Al-Wajid Laptops"
 # USERNAME = "Hurai"
+# USERNAME = 'Administrator'
 CHROME_PATH   = rf"C:\Users\{USERNAME}\AppData\Local\Google\Chrome\Application\chrome.exe"
 # CHROME_PATH   = r"C:\Program Files\Google\Chrome\Application\chrome.exe"
-USER_DATA_DIR = rf"C:\Users\{USERNAME}\automation-profile"
-PROFILE_DIR   = "Profile 4"
-EXT_ID        = "njmehopjdpcckochcggncklnlmikcbnb"
+# USER_DATA_DIR = rf"C:\Users\{USERNAME}\AppData\Local\Google\Chrome\User Data"
+# # USER_DATA_DIR = rf"C:\Users\{USERNAME}\automation-profile"
+# PROFILE_DIR   = "Profile 1"
+
+# CHROME_PATH = r"C:\Program Files\Google\Chrome\Application\chrome.exe"
+USER_DATA_DIR = r"C:\cdp-profile\automation"  # new, dedicated folder
+PROFILE_DIR   = "Default"     
 
 BASE_EXPORT_DIR            = os.path.join(os.getcwd(), "exports")
 CEREBRO_DOWNLOAD_DIR       = os.path.join(BASE_EXPORT_DIR, "cerebro")
@@ -691,53 +622,6 @@ def run_scraper_main(payload, *, from_queue: bool = False):
             print("[INFO] Checking for queued items...")
             process_queue()
 
-# def run_scraper_main(payload):
-#     """
-#     Main function to run the scraper with payload from backend
-#     Returns: dict with results and status
-#     """
-#     # Set scraper as running
-#     set_scraper_running(True)
-    
-#     try:
-#         print(f"[INFO] Starting scraper with {len(payload.get('brands', []))} brands")
-        
-#         results = process_brands(payload)
-
-#         # Persist full run snapshot
-#         with open("full_runs.json", "w", encoding="utf-8") as f:
-#             json.dump(results, f, ensure_ascii=False, indent=2)
-            
-#         print("[DONE] All runs complete. Saved to full_runs.json")
-        
-#         print("\n[Info] Logging to googlesheet")
-#         try:
-#             write_results_to_country_tabs(results)
-#             print("[SUCCESS] Results logged to Google Sheets")
-#         except Exception as e:
-#             print(f"[WARNING] Error logging to sheets: {e}")
-            
-#         return {
-#             "success": True,
-#             "results": results,
-#             "message": "Scraper completed successfully"
-#         }
-            
-#     except Exception as e:
-#         error_msg = f"[ERROR] Failed to process brands: {e}"
-#         print(error_msg)
-#         return {
-#             "success": False,
-#             "error": str(e),
-#             "message": "Scraper failed"
-#         }
-#     finally:
-#         # Set scraper as not running
-#         set_scraper_running(False)
-        
-#         # Process any items in queue
-#         print("[INFO] Checking for queued items...")
-#         process_queue()
 
 # ---------------------------
 # Standalone entrypoint (for testing)
