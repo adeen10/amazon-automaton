@@ -286,12 +286,20 @@ def process_queue():
 # ---------------------------
 # ENV / CONSTANTS
 # ---------------------------
-USERNAME = "Al-Wajid Laptops"
+# Copy-Item "C:\Users\Administrator\AppData\Local\Google\Chrome\User Data\Default" "C:\Users\Administrator\automation-profile" -Recurse
+# USERNAME = "Al-Wajid Laptops"
 # USERNAME = "Hurai"
-CHROME_PATH   = rf"C:\Users\{USERNAME}\AppData\Local\Google\Chrome\Application\chrome.exe"
-# CHROME_PATH   = r"C:\Program Files\Google\Chrome\Application\chrome.exe"
-USER_DATA_DIR = rf"C:\Users\{USERNAME}\automation-profile"
-PROFILE_DIR   = "Profile 4"
+USERNAME = 'Administrator'
+# CHROME_PATH   = rf"C:\Users\{USERNAME}\AppData\Local\Google\Chrome\Application\chrome.exe"
+CHROME_PATH   = r"C:\Program Files\Google\Chrome\Application\chrome.exe"
+USER_DATA_DIR = rf"C:\Users\{USERNAME}\AppData\Local\Google\Chrome\User Data"
+# USER_DATA_DIR = rf"C:\Users\{USERNAME}\automation-profile"
+PROFILE_DIR   = "Profile 1"
+# "C:\Program Files\Google\Chrome\Application\chrome.exe" --remote-debugging-port=9666 --user-data-dir="C:\Users\Administrator\AppData\Local\Google\Chrome\User Data"
+
+# xcopy "C:\Users\Administrator\AppData\Local\Google\Chrome\User Data\Default" "C:\Users\Administrator\AppData\Local\Google\Chrome\User Data\VPSDefaultCopy" /E /I /H
+
+
 EXT_ID        = "njmehopjdpcckochcggncklnlmikcbnb"
 
 BASE_EXPORT_DIR            = os.path.join(os.getcwd(), "exports")
