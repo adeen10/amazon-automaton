@@ -1,4 +1,4 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Depends, Header
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import List, Optional
@@ -8,15 +8,40 @@ import os
 import sys
 from pathlib import Path
 
+# Load environment variables from .env file
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    print("⚠️  python-dotenv not installed. Install with: pip install python-dotenv")
+    print("   Or set environment variables manually.")
+
 # Import scraper functions directly from current directory
 from main_loop import run_scraper_main, is_scraper_running, add_to_queue
+
+# Load API key from environment variable
+API_KEY = os.getenv("API_KEY")
+if not API_KEY:
+    print("⚠️  Warning: API_KEY environment variable not set")
+    print("📝 Please set API_KEY in your backend .env file")
+    API_KEY = "default_key_for_development"  # Fallback for development
+
+async def verify_api_key(x_api_key: str = Header(None)):
+    """Verify the API key from request header"""
+    if not x_api_key:
+        raise HTTPException(status_code=401, detail="API key required")
+    if x_api_key != API_KEY:
+        raise HTTPException(status_code=403, detail="Invalid API key")
+    return x_api_key
+
 
 app = FastAPI(title="Amazon Automation API", version="1.0.0")
 
 # CORS middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173", "http://127.0.0.1:5173"],  # Frontend URLs
+    # allow_origins=["http://localhost:5173", "http://127.0.0.1:5173"],  # Frontend URLs
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -60,7 +85,7 @@ async def health_check():
     return {"ok": True}
 
 @app.get("/api/scraper-status")
-async def get_scraper_status():
+async def get_scraper_status(api_key: str = Depends(verify_api_key)):
     """Get current scraper status"""
     from main_loop import get_queue
     queue_items = get_queue()
@@ -70,7 +95,7 @@ async def get_scraper_status():
     }
 
 @app.post("/api/submissions", response_model=SubmissionResponse)
-async def create_submission(request: SubmissionRequest):
+async def create_submission(request: SubmissionRequest, api_key: str = Depends(verify_api_key)):
     """Create a new submission and start the scraper"""
     try:
         # Validate input
@@ -158,4 +183,4 @@ async def create_submission(request: SubmissionRequest):
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=4000)
+    uvicorn.run(app, host="0.0.0.0", port=4000, access_log=True)
