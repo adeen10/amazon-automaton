@@ -79,6 +79,11 @@ def normalize_country(country_name: str) -> str:
         return "AUS"
     return country
 
+@app.get("/")
+def ping():
+    return {"status": "ok", "via": "ipv6"}
+
+
 @app.get("/health")
 async def health_check():
     """Health check endpoint"""
@@ -183,4 +188,5 @@ async def create_submission(request: SubmissionRequest, api_key: str = Depends(v
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=4000, access_log=True)
+    # uvicorn.run(app, host="0.0.0.0", port=4000, access_log=True)
+    uvicorn.run(app, host="::", port=4000, access_log=True)
