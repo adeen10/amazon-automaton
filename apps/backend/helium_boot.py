@@ -340,11 +340,11 @@ def boot_and_xray(
     *,
     chrome_path: str,
     user_data_dir: str,
-    profile_dir: str = "Profile 4",
+    profile_dir: str = "Default",
     ext_id: str,
     target_url: str,
-    cdp_port: int | None = 9666,      # None => auto free port
-    wait_secs: int = 20,
+    cdp_port: int | None = 28000,      # None => auto free port
+    wait_secs: int = 60,
     popup_visible: bool = False       # open -> send -> (optionally) close
 ):
     """
@@ -367,10 +367,12 @@ def boot_and_xray(
         args = [
             str(chrome),
             f"--remote-debugging-port={cdp_port}",
+            "--remote-debugging-address=127.0.0.1",
             f"--user-data-dir={user_data_dir}",
             f"--profile-directory={profile_dir}",
             "--no-first-run",
             "--no-default-browser-check",
+            "--disable-gpu",
             "about:blank",
         ]
         creationflags = 0
