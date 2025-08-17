@@ -11,31 +11,6 @@ from cerebro import open_amazon_page, open_cerebro_from_xray, cerebro_search, ex
 from gpt import get_keywords_volumes_from_csv, get_gpt_response
 from sheet_writer import write_results_to_country_tabs
 
-
-import urllib.parse as up
-
-def canonicalize_product_url(url: str) -> str:
-    # /dp/ASIN pattern is the most robust
-    m = re.search(r"/dp/([A-Z0-9]{10})", url)
-    if m:
-        return f"https://www.amazon.com/dp/{m.group(1)}"
-    # fallback for /gp/product/ASIN
-    m = re.search(r"/gp/product/([A-Z0-9]{10})", url)
-    if m:
-        return f"https://www.amazon.com/dp/{m.group(1)}"
-    # last resort: return original
-    return url.split("?")[0]
-
-def canonicalize_category_url(category_url: str, keyword: str | None) -> str:
-    # Prefer a clean search URL; avoid qid/crid/sprefix/ref
-    if keyword:
-        q = up.quote_plus(keyword.strip())
-        return f"https://www.amazon.com/s?k={q}"
-    # If you must use a given URL, strip volatile params
-    base = category_url.split("?")[0]
-    return base
-
-
 # ---------------------------
 # QUEUE MANAGEMENT
 # ---------------------------
@@ -422,10 +397,6 @@ def run_single_product(
     print("\n" + "="*80)
     print(f"[RUN] category_url={category_url}\n      product_url={product_url}\n      keyword={keyword}")
     print("="*80)
-    
-    category_url = canonicalize_category_url(category_url, keyword)
-    product_url  = canonicalize_product_url(product_url)
-
 
     # Boot & land on category (ensures Helium is initialized for the marketplace)
     pw, browser, ctx, _ = boot_and_xray(
