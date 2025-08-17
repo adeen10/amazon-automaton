@@ -1,7 +1,7 @@
 {
   "runs": [
     {
-      "brand": "adeen2",
+      "brand": "Big wipes",
       "countries": [
         {
           "name": "US",
@@ -18,19 +18,19 @@
                   "keyword": "candy"
                 },
                 "category_revenue": {
-                  "text": "$8,891,994",
-                  "number": "8891994"
+                  "text": "$8,846,526",
+                  "number": "8846526"
                 },
                 "monthly_revenue": {
                   "meta": {
                     "asin": null,
                     "file_name": "",
                     "product_url": "",
-                    "parent_level_revenue": 203936.08,
-                    "parent_level_revenue_text": "$203,936.08",
+                    "parent_level_revenue": 205557.52,
+                    "parent_level_revenue_text": "$205,557.52",
                     "source_url": "https://www.amazon.com/s?k=candy&crid=1SVK5JELJ5CJ6&sprefix=cricket+bat%2Caps%2C2290&ref=nb_sb_noss_1",
                     "saved_csv": "",
-                    "scraped_at": "2025-08-16T23:50:07Z",
+                    "scraped_at": "2025-08-17T15:29:05Z",
                     "module": "monthlyrev"
                   }
                 },
@@ -38,25 +38,25 @@
                   "picker_best": {
                     "product_details": "SKITTLES POP'd Sour Freeze Dried Candy, 5.5 Oz Resealable Candy Bag",
                     "url": "https://www.amazon.com/dp/B0DLLGVBWV?psc=1",
-                    "parent_level_revenue": "58,686.1",
+                    "parent_level_revenue": "58,818.87",
                     "creation_date": "Oct 31, 2024",
                     "asin": "B0DLLGVBWV",
                     "brand": "Skittles",
                     "price": "5.96"
                   },
                   "raw_result": {
-                    "downloaded_path": "E:\\automation\\ares projects\\amazon automation\\amazon-automation\\apps\\backend\\exports\\Helium_10_Xray_2025-08-16_20250817_045009.csv",
+                    "downloaded_path": "E:\\automation\\ares projects\\amazon automation\\amazon-automation\\apps\\backend\\exports\\Helium_10_Xray_2025-08-17_20250817_202907.csv",
                     "picker_best": {
                       "product_details": "SKITTLES POP'd Sour Freeze Dried Candy, 5.5 Oz Resealable Candy Bag",
                       "url": "https://www.amazon.com/dp/B0DLLGVBWV?psc=1",
-                      "parent_level_revenue": "58,686.1",
+                      "parent_level_revenue": "58,818.87",
                       "creation_date": "Oct 31, 2024",
                       "asin": "B0DLLGVBWV",
                       "brand": "Skittles",
                       "price": "5.96"
                     },
-                    "updated_total_revenue_text": "$8,891,994",
-                    "updated_total_revenue_number": "8891994"
+                    "updated_total_revenue_text": "$8,846,526",
+                    "updated_total_revenue_number": "8846526"
                   }
                 },
                 "profitability_metrics": {
@@ -97,7 +97,9 @@
                     "Error": "Error during API call: Error code: 401 - {'error': {'message': 'Incorrect API key provided: sk-proj-********************************************************************************************************************************************************f-IA. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}"
                   }
                 },
-                "errors": []
+                "errors": [
+                  "category_revenue attempt 1 failed: XRAY not detected on any Amazon tab."
+                ]
               }
             }
           ]

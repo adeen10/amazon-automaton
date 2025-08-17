@@ -456,7 +456,7 @@ def run_single_product(
                     profile_dir=PROFILE_DIR,
                     ext_id=EXT_ID,
                     target_url=category_url,
-                    cdp_port=9222,
+                    cdp_port=28000,
                     wait_secs=60
                 )
             if attempt == MAX_RETRIES:
