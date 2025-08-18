@@ -232,7 +232,7 @@ MONTHLY_REV_DOWNLOAD_DIR   = os.path.join(BASE_EXPORT_DIR, "monthlyrev")
 for d in [CEREBRO_DOWNLOAD_DIR, COMPETITORS_DOWNLOAD_DIR, MONTHLY_REV_DOWNLOAD_DIR]:
     os.makedirs(d, exist_ok=True)
 
-MAX_RETRIES = 8
+MAX_RETRIES = 11
 
 # ---------------------------
 # XRAY opener (unchanged)
