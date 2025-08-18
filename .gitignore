@@ -1,16 +1,16 @@
 # Node dependencies
 apps/frontend/node_modules/
 apps/backend/node_modules/
+apps/electron/node_modules/
 
 # Environment files
 apps/frontend/.env
 apps/backend/.env
-apps/scraper/.env
-apps/backend/scraper/.env
+apps/electron/.env
 
-# scrapper
-apps/scraper/.env.example
-apps/scraper/.env
+apps/backend/venv/
+
+
 .env
 # Python cache
 __pycache__/
