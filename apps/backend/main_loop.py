@@ -214,18 +214,18 @@ def process_queue():
 # PROFILE_DIR   = "Profile 4"
 EXT_ID        = "njmehopjdpcckochcggncklnlmikcbnb"
 
-# USERNAME = "Al-Wajid Laptops"
+USERNAME = "Al-Wajid Laptops"
 # USERNAME = "Hurai"
-USERNAME = 'Administrator'
-# CHROME_PATH   = rf"C:\Users\{USERNAME}\AppData\Local\Google\Chrome\Application\chrome.exe"
+# USERNAME = 'Administrator'
+CHROME_PATH   = rf"C:\Users\{USERNAME}\AppData\Local\Google\Chrome\Application\chrome.exe"
 # CHROME_PATH   = r"C:\Program Files\Google\Chrome\Application\chrome.exe"
-USER_DATA_DIR = rf"C:\Users\{USERNAME}\AppData\Local\Google\Chrome\User Data"
+# USER_DATA_DIR = rf"C:\Users\{USERNAME}\AppData\Local\Google\Chrome\User Data"
 # # USER_DATA_DIR = rf"C:\Users\{USERNAME}\automation-profile"
-PROFILE_DIR   = "Profile 1"
+# PROFILE_DIR   = "Profile 1"
 
-CHROME_PATH = r"C:\Program Files\Google\Chrome\Application\chrome.exe"
-# USER_DATA_DIR = r"C:\cdp-profile\automation"  # new, dedicated folder
-# PROFILE_DIR   = "Default"     
+# CHROME_PATH = r"C:\Program Files\Google\Chrome\Application\chrome.exe"
+USER_DATA_DIR = r"C:\cdp-profile\automation"  # new, dedicated folder
+PROFILE_DIR   = "Default"     
 
 BASE_EXPORT_DIR            = os.path.join(os.getcwd(), "exports")
 CEREBRO_DOWNLOAD_DIR       = os.path.join(BASE_EXPORT_DIR, "cerebro")
@@ -239,92 +239,92 @@ MAX_RETRIES = 11
 # ---------------------------
 # XRAY opener (unchanged)
 # ---------------------------
-# def open_with_xray(
-#     browser: Browser,
-#     *,
-#     ext_id: str,
-#     target_url: str,
-#     wait_secs: int = 60,
-#     popup_visible: bool = False
-# ):
-#     """
-#     Reuse existing Playwright Browser to tell Helium to open target_url with XRAY.
-#     Does NOT call sync_playwright().start() again.
-#     """
-#     if not browser.contexts:
-#         ctx = browser.new_context()
-#     else:
-#         ctx = browser.contexts[0]
+def open_with_xray(
+    browser: Browser,
+    *,
+    ext_id: str,
+    target_url: str,
+    wait_secs: int = 60,
+    popup_visible: bool = False
+):
+    """
+    Reuse existing Playwright Browser to tell Helium to open target_url with XRAY.
+    Does NOT call sync_playwright().start() again.
+    """
+    if not browser.contexts:
+        ctx = browser.new_context()
+    else:
+        ctx = browser.contexts[0]
     
-#     popup_url = f"chrome-extension://{ext_id}/popup.html"
-#     popup = ctx.new_page()
-#     popup.goto(popup_url, wait_until="domcontentloaded")
+    popup_url = f"chrome-extension://{ext_id}/popup.html"
+    popup = ctx.new_page()
+    popup.goto(popup_url, wait_until="domcontentloaded")
 
-#     popup.evaluate(
-#         """(targetUrl) => new Promise((resolve) => {
-#             chrome.runtime.sendMessage(
-#                 { type: "open-page-and-xray", params: { url: targetUrl } },
-#                 () => resolve(true)
-#             );
-#             setTimeout(() => resolve(false), 40000);
-#         })""",
-#         target_url,
-#     )
-#     print(f"[info] Sent XRAY open-page for {target_url}")
-#     if not popup_visible:
-#         try: popup.close()
-#         except Exception: pass
+    popup.evaluate(
+        """(targetUrl) => new Promise((resolve) => {
+            chrome.runtime.sendMessage(
+                { type: "open-page-and-xray", params: { url: targetUrl } },
+                () => resolve(true)
+            );
+            setTimeout(() => resolve(false), 40000);
+        })""",
+        target_url,
+    )
+    print(f"[info] Sent XRAY open-page for {target_url}")
+    if not popup_visible:
+        try: popup.close()
+        except Exception: pass
 
-#     # Optional: light wait loop so navigation starts before next step
-#     deadline = time.time() + wait_secs
-#     while time.time() < deadline:
-#         for pg in ctx.pages:
-#             if "amazon." in pg.url:
-#                 try:
-#                     pg.get_by_role("button", name=re.compile(r"\bExport\b", re.I)).first.wait_for(timeout=300)
-#                     print("[SUCCESS] XRAY export UI detected.")
-#                     return pg
-#                 except Exception:
-#                     pass
-#         time.sleep(0.25)
-#     print("[warn] Did not positively detect XRAY within wait; proceeding anyway.")
-#     return None
+    # Optional: light wait loop so navigation starts before next step
+    deadline = time.time() + wait_secs
+    while time.time() < deadline:
+        for pg in ctx.pages:
+            if "amazon." in pg.url:
+                try:
+                    pg.get_by_role("button", name=re.compile(r"\bExport\b", re.I)).first.wait_for(timeout=300)
+                    print("[SUCCESS] XRAY export UI detected.")
+                    return pg
+                except Exception:
+                    pass
+        time.sleep(0.25)
+    print("[warn] Did not positively detect XRAY within wait; proceeding anyway.")
+    return None
 
-def open_with_xray(browser, *, ext_id: str, target_url: str, wait_secs: int = 30, popup_visible: bool = False):
-    """
-    Open a new tab at target_url and ensure Xray is open.
-    Tries extension message first; if panel not detected, does widget-hover fallback.
-    """
-    # Use any existing context
-    ctx = browser.contexts[0] if browser.contexts else browser.new_context()
+# def open_with_xray(browser, *, ext_id: str, target_url: str, wait_secs: int = 30, popup_visible: bool = False):
+#     """
+#     Open a new tab at target_url and ensure Xray is open.
+#     Tries extension message first; if panel not detected, does widget-hover fallback.
+#     """
+#     # Use any existing context
+#     ctx = browser.contexts[0] if browser.contexts else browser.new_context()
 
-    # Try extension path first
-    print("[info] (product) Attempting Xray via extension message...")
-    page = _open_xray_via_extension(ctx, ext_id=ext_id, target_url=target_url,
-                                    popup_visible=popup_visible, wait_secs=wait_secs)
+#     # Try extension path first
+#     print("[info] (product) Attempting Xray via extension message...")
+#     page = _open_xray_via_extension(ctx, ext_id=ext_id, target_url=target_url,
+#                                     popup_visible=popup_visible, wait_secs=wait_secs)
 
-    if not page:
-        # Navigate to product ourselves
-        print("[warn] (product) Extension did not open tab; navigating directly...")
-        page = ctx.new_page()
-        try:
-            page.goto(target_url, wait_until="domcontentloaded", timeout=45000)
-        except PWTimeout:
-            page.goto(target_url, wait_until="domcontentloaded", timeout=45000)
+#     if not page:
+#         # Navigate to product ourselves
+#         print("[warn] (product) Extension did not open tab; navigating directly...")
+#         page = ctx.new_page()
+#         try:
+#             page.goto(target_url, wait_until="domcontentloaded", timeout=45000)
+#         except PWTimeout:
+#             page.goto(target_url, wait_until="domcontentloaded", timeout=45000)
 
-    # If panel not visible yet, use widget fallback
-    if _wait_for_xray_panel(page, timeout_ms=8000):
-        print("[ok] (product) Xray detected (extension path).")
-        return page
+#     # If panel not visible yet, use widget fallback
+#     if _wait_for_xray_panel(page, timeout_ms=8000):
+#         print("[ok] (product) Xray detected (extension path).")
+#         return page
 
-    print("[info] (product) Falling back to widget hover…")
-    ok = _open_xray_via_widget(page, inject_settle_ms=1500, menu_timeout_ms=15000, panel_timeout_ms=20000)
-    if not ok:
-        print("[warn] (product) Xray panel not detected after both strategies.")
-        # Optional: raise so outer retry logic triggers
-        # raise RuntimeError("xray not detected on product page")
+#     print("[info] (product) Falling back to widget hover…")
+#     ok = _open_xray_via_widget(page, inject_settle_ms=1500, menu_timeout_ms=15000, panel_timeout_ms=20000)
+#     if not ok:
+#         print("[warn] (product) Xray panel not detected after both strategies.")
+#         # Optional: raise so outer retry logic triggers
+#         # raise RuntimeError("xray not detected on product page")
 
-    return page
+#     return page
 
 
 

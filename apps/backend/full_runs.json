@@ -1,7 +1,7 @@
 {
   "runs": [
     {
-      "brand": "sdafas",
+      "brand": "sdfd",
       "countries": [
         {
           "name": "US",
@@ -18,8 +18,8 @@
                   "keyword": "football"
                 },
                 "category_revenue": {
-                  "text": "$6,094,722",
-                  "number": "6094722"
+                  "text": "$5,803,313",
+                  "number": "5803313"
                 },
                 "monthly_revenue": {
                   "meta": {
@@ -30,51 +30,51 @@
                     "parent_level_revenue_text": "$184,215.17",
                     "source_url": "https://www.amazon.com/s?k=football&crid=11N4YAPWDPUF1&sprefix=football%2Caps%2C1829&ref=nb_sb_noss_1",
                     "saved_csv": "",
-                    "scraped_at": "2025-08-18T12:52:05Z",
+                    "scraped_at": "2025-08-18T14:10:36Z",
                     "module": "monthlyrev"
                   }
                 },
                 "competitors_flow": {
                   "picker_best": {
-                    "product_details": "Battle Sports Defender Football Shoulder Pads – The Lightest, Most Protective in Its Class – Aerospace Grade Materials, Ventilated Design, Removable Sternum Plate, Foam Neck Roll",
-                    "url": "https://www.amazon.com/dp/B0F28SWDV5?psc=1",
-                    "parent_level_revenue": "214,849.6",
-                    "creation_date": "Mar 26, 2025",
-                    "asin": "B0F28SWDV5",
-                    "brand": "Battle",
-                    "price": "159.99"
+                    "product_details": "WILSON GST SpeedSkin Footballs - Brown",
+                    "url": "https://www.amazon.com/dp/B0DHLLH5Q7?psc=1",
+                    "parent_level_revenue": "82,458.05",
+                    "creation_date": "Oct 1, 2024",
+                    "asin": "B0DHLLH5Q7",
+                    "brand": "WILSON",
+                    "price": "49.95"
                   },
                   "raw_result": {
-                    "downloaded_path": "E:\\automation\\ares projects\\amazon automation\\amazon-automation\\apps\\backend\\exports\\Helium_10_Xray_2025-08-18_20250818_175208.csv",
+                    "downloaded_path": "E:\\automation\\ares projects\\amazon automation\\amazon-automation\\apps\\backend\\exports\\Helium_10_Xray_2025-08-18_20250818_191038.csv",
                     "picker_best": {
-                      "product_details": "Battle Sports Defender Football Shoulder Pads – The Lightest, Most Protective in Its Class – Aerospace Grade Materials, Ventilated Design, Removable Sternum Plate, Foam Neck Roll",
-                      "url": "https://www.amazon.com/dp/B0F28SWDV5?psc=1",
-                      "parent_level_revenue": "214,849.6",
-                      "creation_date": "Mar 26, 2025",
-                      "asin": "B0F28SWDV5",
-                      "brand": "Battle",
-                      "price": "159.99"
+                      "product_details": "WILSON GST SpeedSkin Footballs - Brown",
+                      "url": "https://www.amazon.com/dp/B0DHLLH5Q7?psc=1",
+                      "parent_level_revenue": "82,458.05",
+                      "creation_date": "Oct 1, 2024",
+                      "asin": "B0DHLLH5Q7",
+                      "brand": "WILSON",
+                      "price": "49.95"
                     },
-                    "updated_total_revenue_text": "$6,094,722",
-                    "updated_total_revenue_number": "6094722"
+                    "updated_total_revenue_text": "$5,803,313",
+                    "updated_total_revenue_number": "5803313"
                   }
                 },
                 "profitability_metrics": {
                   "fba_fees": {
-                    "text": "$10.28",
-                    "number": "10.28"
+                    "text": "$7.40",
+                    "number": "7.40"
                   },
                   "storage_fee_jan_sep": {
-                    "text": "$0.94",
-                    "number": "0.94"
+                    "text": "$0.30",
+                    "number": "0.30"
                   },
                   "storage_fee_oct_dec": {
-                    "text": "$2.60",
-                    "number": "2.60"
+                    "text": "$0.84",
+                    "number": "0.84"
                   },
                   "product_price": {
-                    "text": "159.99",
-                    "number": "159.99"
+                    "text": "49.95",
+                    "number": "49.95"
                   }
                 },
                 "keywords_volumes": {
