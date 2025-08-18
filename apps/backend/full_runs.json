@@ -1,95 +1,95 @@
 {
   "runs": [
     {
-      "brand": "adeen2",
+      "brand": "sdafas",
       "countries": [
         {
           "name": "US",
           "products": [
             {
-              "productname": "SNICKERS, TWIX, & MILKY WAY Minis Chocolate Candy Bars Variety Pack, 150 Ct Bulk Bag",
-              "url": "https://www.amazon.com/MILKY-SNICKERS-Original-Minis-Candy/dp/B0CHXYTJS9/ref=sr_1_1?crid=1SVK5JELJ5CJ6&dib=eyJ2IjoiMSJ9.E9ldPDRdgYnfFKtOnRO44KeoFMyiVyrlMldYnaiJnqrcc8hgTARGQesgfV_p5dHkTfJhEWOBwzyUvSR7Ot7lomBmI8x4DrCo0rX0oSm8PKZrYGWUG26t3hPhSv3bExmUrWlkU_NUnMi4Tzf2lUDTXOynxDY59oilU0SzbzH5ApE6LpoGnDgjzD8sfSblIIlDVvdG0mvIMkxCuOEramvgHcmyKGM75Zs8LyQm760fZ67OrWoZKOCCL3a0eoYbOyW0BZF2C4ZayencqIgf_2r7iKonp6GbhDRTHnCtlCqNgps.hxYMlq_TCFPK6ydUJm_nRhJIkEU-i0z61Yr-6sd4E8w&dib_tag=se&keywords=candy&qid=1755351397&sprefix=cricket%2Bbat%2Caps%2C2290&sr=8-1&th=1",
-              "keyword": "candy",
-              "categoryUrl": "https://www.amazon.com/s?k=candy&crid=1SVK5JELJ5CJ6&sprefix=cricket+bat%2Caps%2C2290&ref=nb_sb_noss_1",
+              "productname": "wilson",
+              "url": "https://www.amazon.com/Wilson-Super-Grip-Official-Football/dp/B0012SNLJG/ref=sr_1_1?crid=11N4YAPWDPUF1&dib=eyJ2IjoiMSJ9.VFtpRBXpX0rlGNlPl2X6F_ab989t9a323UfwzuNlhpbtkOqD-aubFTI4dAX36PwIXH7cLX7awRpXDQb6-IG3V_VmUb3FmmkC9xgCLVouC3tetG6k0jSvuBtaNGEBvomgUd8jINBfqaATt9DrujyS01gNneur4LpTIpMnZEp4lQwhUdDyH3h6e93SrJZwLtfHfWetsXNSmcodkCPIWGQ7Ma1gOVeqLrBvxsPtvzsMOjisBhY8i0gazoPWVw9_rph6tc4Ycuva4Q0KZtPeMayX1Gl1-AY900Z7aQ1wVcfKEqs.yezBLzNWMR_sl6Maz5gxBkqrSWK93IBjwUEN_UBBmIE&dib_tag=se&keywords=football&qid=1755186151&sprefix=football%2Caps%2C1829&sr=8-1&th=1",
+              "keyword": "football",
+              "categoryUrl": "https://www.amazon.com/s?k=football&crid=11N4YAPWDPUF1&sprefix=football%2Caps%2C1829&ref=nb_sb_noss_1",
               "result": {
                 "inputs": {
-                  "category_url": "https://www.amazon.com/s?k=candy&crid=1SVK5JELJ5CJ6&sprefix=cricket+bat%2Caps%2C2290&ref=nb_sb_noss_1",
-                  "product_url": "https://www.amazon.com/MILKY-SNICKERS-Original-Minis-Candy/dp/B0CHXYTJS9/ref=sr_1_1?crid=1SVK5JELJ5CJ6&dib=eyJ2IjoiMSJ9.E9ldPDRdgYnfFKtOnRO44KeoFMyiVyrlMldYnaiJnqrcc8hgTARGQesgfV_p5dHkTfJhEWOBwzyUvSR7Ot7lomBmI8x4DrCo0rX0oSm8PKZrYGWUG26t3hPhSv3bExmUrWlkU_NUnMi4Tzf2lUDTXOynxDY59oilU0SzbzH5ApE6LpoGnDgjzD8sfSblIIlDVvdG0mvIMkxCuOEramvgHcmyKGM75Zs8LyQm760fZ67OrWoZKOCCL3a0eoYbOyW0BZF2C4ZayencqIgf_2r7iKonp6GbhDRTHnCtlCqNgps.hxYMlq_TCFPK6ydUJm_nRhJIkEU-i0z61Yr-6sd4E8w&dib_tag=se&keywords=candy&qid=1755351397&sprefix=cricket%2Bbat%2Caps%2C2290&sr=8-1&th=1",
-                  "keyword": "candy"
+                  "category_url": "https://www.amazon.com/s?k=football&crid=11N4YAPWDPUF1&sprefix=football%2Caps%2C1829&ref=nb_sb_noss_1",
+                  "product_url": "https://www.amazon.com/Wilson-Super-Grip-Official-Football/dp/B0012SNLJG/ref=sr_1_1?crid=11N4YAPWDPUF1&dib=eyJ2IjoiMSJ9.VFtpRBXpX0rlGNlPl2X6F_ab989t9a323UfwzuNlhpbtkOqD-aubFTI4dAX36PwIXH7cLX7awRpXDQb6-IG3V_VmUb3FmmkC9xgCLVouC3tetG6k0jSvuBtaNGEBvomgUd8jINBfqaATt9DrujyS01gNneur4LpTIpMnZEp4lQwhUdDyH3h6e93SrJZwLtfHfWetsXNSmcodkCPIWGQ7Ma1gOVeqLrBvxsPtvzsMOjisBhY8i0gazoPWVw9_rph6tc4Ycuva4Q0KZtPeMayX1Gl1-AY900Z7aQ1wVcfKEqs.yezBLzNWMR_sl6Maz5gxBkqrSWK93IBjwUEN_UBBmIE&dib_tag=se&keywords=football&qid=1755186151&sprefix=football%2Caps%2C1829&sr=8-1&th=1",
+                  "keyword": "football"
                 },
                 "category_revenue": {
-                  "text": "$8,891,994",
-                  "number": "8891994"
+                  "text": "$6,094,722",
+                  "number": "6094722"
                 },
                 "monthly_revenue": {
                   "meta": {
                     "asin": null,
                     "file_name": "",
                     "product_url": "",
-                    "parent_level_revenue": 203936.08,
-                    "parent_level_revenue_text": "$203,936.08",
-                    "source_url": "https://www.amazon.com/s?k=candy&crid=1SVK5JELJ5CJ6&sprefix=cricket+bat%2Caps%2C2290&ref=nb_sb_noss_1",
+                    "parent_level_revenue": 184215.17,
+                    "parent_level_revenue_text": "$184,215.17",
+                    "source_url": "https://www.amazon.com/s?k=football&crid=11N4YAPWDPUF1&sprefix=football%2Caps%2C1829&ref=nb_sb_noss_1",
                     "saved_csv": "",
-                    "scraped_at": "2025-08-16T23:50:07Z",
+                    "scraped_at": "2025-08-18T12:52:05Z",
                     "module": "monthlyrev"
                   }
                 },
                 "competitors_flow": {
                   "picker_best": {
-                    "product_details": "SKITTLES POP'd Sour Freeze Dried Candy, 5.5 Oz Resealable Candy Bag",
-                    "url": "https://www.amazon.com/dp/B0DLLGVBWV?psc=1",
-                    "parent_level_revenue": "58,686.1",
-                    "creation_date": "Oct 31, 2024",
-                    "asin": "B0DLLGVBWV",
-                    "brand": "Skittles",
-                    "price": "5.96"
+                    "product_details": "Battle Sports Defender Football Shoulder Pads – The Lightest, Most Protective in Its Class – Aerospace Grade Materials, Ventilated Design, Removable Sternum Plate, Foam Neck Roll",
+                    "url": "https://www.amazon.com/dp/B0F28SWDV5?psc=1",
+                    "parent_level_revenue": "214,849.6",
+                    "creation_date": "Mar 26, 2025",
+                    "asin": "B0F28SWDV5",
+                    "brand": "Battle",
+                    "price": "159.99"
                   },
                   "raw_result": {
-                    "downloaded_path": "E:\\automation\\ares projects\\amazon automation\\amazon-automation\\apps\\backend\\exports\\Helium_10_Xray_2025-08-16_20250817_045009.csv",
+                    "downloaded_path": "E:\\automation\\ares projects\\amazon automation\\amazon-automation\\apps\\backend\\exports\\Helium_10_Xray_2025-08-18_20250818_175208.csv",
                     "picker_best": {
-                      "product_details": "SKITTLES POP'd Sour Freeze Dried Candy, 5.5 Oz Resealable Candy Bag",
-                      "url": "https://www.amazon.com/dp/B0DLLGVBWV?psc=1",
-                      "parent_level_revenue": "58,686.1",
-                      "creation_date": "Oct 31, 2024",
-                      "asin": "B0DLLGVBWV",
-                      "brand": "Skittles",
-                      "price": "5.96"
+                      "product_details": "Battle Sports Defender Football Shoulder Pads – The Lightest, Most Protective in Its Class – Aerospace Grade Materials, Ventilated Design, Removable Sternum Plate, Foam Neck Roll",
+                      "url": "https://www.amazon.com/dp/B0F28SWDV5?psc=1",
+                      "parent_level_revenue": "214,849.6",
+                      "creation_date": "Mar 26, 2025",
+                      "asin": "B0F28SWDV5",
+                      "brand": "Battle",
+                      "price": "159.99"
                     },
-                    "updated_total_revenue_text": "$8,891,994",
-                    "updated_total_revenue_number": "8891994"
+                    "updated_total_revenue_text": "$6,094,722",
+                    "updated_total_revenue_number": "6094722"
                   }
                 },
                 "profitability_metrics": {
                   "fba_fees": {
-                    "text": "$3.38",
-                    "number": "3.38"
+                    "text": "$10.28",
+                    "number": "10.28"
                   },
                   "storage_fee_jan_sep": {
-                    "text": "$0.05",
-                    "number": "0.05"
+                    "text": "$0.94",
+                    "number": "0.94"
                   },
                   "storage_fee_oct_dec": {
-                    "text": "$0.14",
-                    "number": "0.14"
+                    "text": "$2.60",
+                    "number": "2.60"
                   },
                   "product_price": {
-                    "text": "0",
-                    "number": "0"
+                    "text": "159.99",
+                    "number": "159.99"
                   }
                 },
                 "keywords_volumes": {
-                  "user_prompt": "candy 354876\ncandy variety pack 79586\nbulk candy 59976\nchocolate candy 53154\ncandy bulk 50428\nbulk candy individually wrapped 27219\nhalloween candy 27214\ncandy bars 23330\nchocolate candy variety pack 18674\nindividually wrapped candy 18491Aforementioned are the top keywords sorted by search volume.",
+                  "user_prompt": "football 66363\nfootball accessories 49461\nnerf football 15599\nyouth football 10113\nfootball gear 10079\nflag football 5562\nfootball backplates 5081\nfootball training equipment 4612\nwater football 4607\npeewee size football 4070Aforementioned are the top keywords sorted by search volume.",
                   "search_volumes": [
-                    354876,
-                    79586,
-                    59976,
-                    53154,
-                    50428,
-                    27219,
-                    27214,
-                    23330,
-                    18674,
-                    18491
+                    66363,
+                    49461,
+                    15599,
+                    10113,
+                    10079,
+                    5562,
+                    5081,
+                    4612,
+                    4607,
+                    4070
                   ]
                 },
                 "gpt_projection": {
