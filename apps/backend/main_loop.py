@@ -212,18 +212,18 @@ def process_queue():
 # PROFILE_DIR   = "Profile 4"
 EXT_ID        = "njmehopjdpcckochcggncklnlmikcbnb"
 
-USERNAME = "Al-Wajid Laptops"
+# USERNAME = "Al-Wajid Laptops"
 # USERNAME = "Hurai"
-# USERNAME = 'Administrator'
-CHROME_PATH   = rf"C:\Users\{USERNAME}\AppData\Local\Google\Chrome\Application\chrome.exe"
+USERNAME = 'Administrator'
+# CHROME_PATH   = rf"C:\Users\{USERNAME}\AppData\Local\Google\Chrome\Application\chrome.exe"
 # CHROME_PATH   = r"C:\Program Files\Google\Chrome\Application\chrome.exe"
-# USER_DATA_DIR = rf"C:\Users\{USERNAME}\AppData\Local\Google\Chrome\User Data"
+USER_DATA_DIR = rf"C:\Users\{USERNAME}\AppData\Local\Google\Chrome\User Data"
 # # USER_DATA_DIR = rf"C:\Users\{USERNAME}\automation-profile"
-# PROFILE_DIR   = "Profile 1"
+PROFILE_DIR   = "Profile 1"
 
-# CHROME_PATH = r"C:\Program Files\Google\Chrome\Application\chrome.exe"
-USER_DATA_DIR = r"C:\cdp-profile\automation"  # new, dedicated folder
-PROFILE_DIR   = "Default"     
+CHROME_PATH = r"C:\Program Files\Google\Chrome\Application\chrome.exe"
+# USER_DATA_DIR = r"C:\cdp-profile\automation"  # new, dedicated folder
+# PROFILE_DIR   = "Default"     
 
 BASE_EXPORT_DIR            = os.path.join(os.getcwd(), "exports")
 CEREBRO_DOWNLOAD_DIR       = os.path.join(BASE_EXPORT_DIR, "cerebro")
@@ -311,7 +311,7 @@ def run_single_product(
         profile_dir=PROFILE_DIR,
         ext_id=EXT_ID,
         target_url=category_url,
-        cdp_port=9666,
+        cdp_port=28000,
         wait_secs=60
     )
     print("[ok] boot complete; XRAY should be running.")
@@ -362,7 +362,7 @@ def run_single_product(
                     profile_dir=PROFILE_DIR,
                     ext_id=EXT_ID,
                     target_url=category_url,
-                    cdp_port=9666,
+                    cdp_port=28000,
                     wait_secs=60
                 )
             if attempt == MAX_RETRIES:
